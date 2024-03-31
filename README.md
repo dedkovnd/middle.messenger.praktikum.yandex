@@ -11,4 +11,4 @@
 
 Навигация в рамках по меню на странице авторизации
 
-ссылка на netlify https://unique-lokum-607c0f.netlify.app/
+ссылка на netlify https://eloquent-khapse-1b5b53.netlify.app/

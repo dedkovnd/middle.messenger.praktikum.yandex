@@ -8,7 +8,8 @@ const pages = {
   'registration': [Pages.RegistrationPage],
   'profile': [Pages.ProfilePage],
   'error': [Pages.ErrorPage],
-  'error500': [Pages.Error500]
+  'error500': [Pages.Error500],
+  'profileedit': [Pages.ProfileEdit]
 };
 
 Object.entries(Components).forEach(([ name, component ]) => {

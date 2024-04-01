@@ -1,3 +1,5 @@
+@import '../../assets/variables';
+
 .navigation {
   position: absolute;
   display: flex;
@@ -25,5 +27,13 @@
   
   &__input {
     margin-top: 16px;
+  }
+}
+
+.nav-link {
+  color: $link-color;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
   }
 }

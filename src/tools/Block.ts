@@ -1,6 +1,8 @@
 import EventBus from "./EventBus";
 import Handlebars from "handlebars";
 
+type TEvents = Values<typeof Block.EVENTS>
+
 type Children = Record<string, Block>
 
 type Props = {
@@ -28,9 +30,8 @@ export default class Block {
   _element = null;
   _meta = null;
   _id = Math.floor(100000 + Math.random() * 900000);
-  children: Children
   props: Props
-  lists: Lists
+  children: Children
   eventBus: ()=> EventBus<string>
   
   /** JSDoc
@@ -43,15 +44,14 @@ export default class Block {
   private _eventbus;
 
   constructor(propsWithChildren = {}) {
-    const eventBus = new EventBus();
+    const eventBus = new EventBus<TEvents>();
     // this._meta = {
     //   tagName,
     //   props
     // };
-    const {props, children, lists} = this._getChildrenAndProps(propsWithChildren);
+    const {props, children} = this._getChildrenAndProps(propsWithChildren);
     this.props = this._makePropsProxy({ ...props });
     this.children = children;
-    this.lists = lists
   
     this.eventBus = () => eventBus;
   
@@ -68,7 +68,7 @@ export default class Block {
   })
  }
   
-  _registerEvents(eventBus: EventBus<string>) {
+  _registerEvents(eventBus: EventBus<TEvents>) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -122,19 +122,16 @@ export default class Block {
   _getChildrenAndProps(propsAndChildren: PropsAndChildren) {
     const children = {};
     const props = {};
-    const lists = {};
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
     if (value instanceof Block) {
             children[key] = value;
-    } else if (Array.isArray(value)){
-      lists[key] = value;
     } else {
             props[key] = value;
         }
     });
 
-    return { children, props, lists };
+    return { children, props };
   }
  
   setProps = nextProps => {
@@ -156,20 +153,35 @@ export default class Block {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`
     });
 
+    const childrenProps = [];
+    Object.entries(propsAndStubs).forEach(([key, value]) => {
+      if(Array.isArray(value)) {
+        propsAndStubs[key] = value.map((item) => {
+          if(item instanceof Block) {
+            childrenProps.push(item)
+            return `<div data-id="${item._id}"></div>`
+          }
+
+          return item;
+        }).join('')
+      }
+  });
     const fragment = this._createDocumentElement('template');
 
     fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
     const newElement = fragment.content.firstElementChild;
 
-    Object.values(this.children).forEach(child => {
+    [...Object.values(this.children), ...childrenProps].forEach(child => {
         const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
         
         stub?.replaceWith(child.getContent());
     });
 
+
     if (this._element) {
-        this._element.replaceWith(newElement);
-      }
+      newElement.style.display = this._element.style.display
+      this._element.replaceWith(newElement);
+    }
   
       this._element = newElement;
 
@@ -179,10 +191,21 @@ export default class Block {
   render() {}
   
   getContent() {
+    // Хак, чтобы вызвать CDM только после добавления в DOM
+    if (this.element?.parentNode?.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+      setTimeout(() => {
+        if (
+          this.element?.parentNode?.nodeType !== Node.DOCUMENT_FRAGMENT_NODE
+        ) {
+          this.dispatchComponentDidMount();
+        }
+      }, 100);
+    }
+
     return this.element;
   }
 
-  _makePropsProxy(props: any) {
+  _makePropsProxy(props) {
     // Можно и так передать this
     // Такой способ больше не применяется с приходом ES6+
     const self = this;
@@ -197,7 +220,6 @@ export default class Block {
         target[prop] = value;
   
         // Запускаем обновление компоненты
-        // Плохой cloneDeep, в следующей итерации нужно заставлять добавлять cloneDeep им самим
         self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
         return true;
       },

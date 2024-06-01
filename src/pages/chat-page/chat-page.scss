@@ -11,10 +11,13 @@
   display: flex;
 
   &__list {
+    background: $chat-list-bgcolor;
+    height: 100%;
+    overflow: auto;
     border-right: 1px solid $divider-line-color;
     width: 30%;
   }
   &__profile {
-    width: 100%;
+    padding-left: 75%;
   }
 }

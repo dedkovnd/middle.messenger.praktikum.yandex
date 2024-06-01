@@ -1,0 +1,14 @@
+@import "../../assets/variables";
+
+.text-error__active {
+    color: $text-red;
+    font-size: 10px;
+    font-weight: 400;
+    display: block;
+    padding-top: 2px;
+    &__user {
+      color: $text-red;
+      margin-top: 10px;
+      margin-left: 40px;
+    }
+  }

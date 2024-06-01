@@ -4,8 +4,7 @@
   display: flex;
   border-right: 2px solid $chat-message-inverse-bgcolor;
   width: 5%;
-  min-height: 100%;
-  margin-right: auto;
+  min-height: 100vh;
   background-color: $chat-message-my-bgcolor;
   align-items: center;
   &__triangle {
@@ -19,4 +18,3 @@
     cursor: pointer;
   }
 }
-

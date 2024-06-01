@@ -1,12 +1,15 @@
-@import '../../assets/variables';
+@import "../../assets/variables";
 
 .input-field {
-  &__title {
-    font: $font-nano;
-    color: $text-light-color;
-  }
+  outline: none;
+  border: none;
+  padding-left: 4px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font: inherit;
+}
 
-  &__element {
-    border-bottom: 1px solid $link-color;
-  }
+.input-field:focus {
+  border: 1px solid $link-color;
 }

@@ -1,24 +1,19 @@
-$font-body: Inter,"Segoe UI","Roboto","Helvetica Neue",sans-sans;
-
+$font-body: inter,"Segoe UI","Roboto","Helvetica Neue",sans-sans;
 $font-weight-regular: 500;
 $font-weight-semibold: 600;
-
-$font-large: #{$font-weight-regular} 40px/40px #{$font-body};
-$font-big: #{$font-weight-regular} 20px/20px #{$font-body};
-$font-title: #{$font-weight-semibold} 16px/16px #{$font-body};
-$font-regular: #{$font-weight-regular} 13px/13px #{$font-body};
-$font-small: #{$font-weight-regular} 12px/12px #{$font-body};
-$font-micro: #{$font-weight-regular} 11px/11px #{$font-body};
-$font-nano: #{$font-weight-regular} 9px/9px #{$font-body};
-
+$font-large: #{$font-weight-regular} 40px/ 40px #{$font-body};
+$font-big: #{$font-weight-regular} 20px/ 20px #{$font-body};
+$font-title: #{$font-weight-semibold} 16px/ 16px #{$font-body};
+$font-regular: #{$font-weight-regular} 13px/ 13px #{$font-body};
+$font-small: #{$font-weight-regular} 12px/ 12px #{$font-body};
+$font-micro: #{$font-weight-regular} 11px/ 11px #{$font-body};
+$font-nano: #{$font-weight-regular} 9px/ 9px #{$font-body};
 $text-bgcolor: #FFF;
 $text-color: #000;
 $text-light-color: #999;
-$text-red: #FF0000;
-
+$text-red: #F00;
 $link-color: #3369f3;
 $title-color: #1E1E1E;
-
 $button-color: #FFF;
 $button-bgcolor: #{$link-color};
 
@@ -33,8 +28,7 @@ $divider-line-color: #EAEAEA;
 
 $chat-list-bgcolor: #FBFBFB;
 $chat-list-current-bgcolor: #E4EDFD;
-
-$chat-message-font: #{$font-weight-regular} 12px/15px #{$font-body};
+$chat-message-font: #{$font-weight-regular} 12px/ 15px #{$font-body};
 $chat-message-bgcolor: #F8F8F8;
 $chat-message-color: #1E1E1E;
 $chat-message-inverse-color: #FFF;
@@ -45,8 +39,7 @@ $chat-message-my-time-color: #{$button-bgcolor};
 
 $dialog-bgcolor: #{$text-bgcolor};
 $dialog-shadow: #{$menu-shadow};
-
-$dialog-modal-overlay-bgcolor: #00000066;
+$dialog-modal-overlay-bgcolor: #0006;
 $dialog-modal-content-shadow: #{$menu-shadow};
 $dialog-modal-title: #{$font-weight-regular} 15px/20px #{$font-body};
 

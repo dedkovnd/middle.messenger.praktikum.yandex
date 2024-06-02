@@ -11,4 +11,6 @@
 
 Навигация по меню на странице авторизации\
 
+ссылка на netlify https://sparkly-buttercream-999a44.netlify.app/
+
 

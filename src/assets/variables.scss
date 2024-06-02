@@ -20,10 +20,8 @@ $menu-button-color: #{$button-bgcolor};
 $menu-button-bgcolor: #F5F5F5;
 $menu-font: #{$font-weight-regular} 12px / 14px #{$font-body};
 $menu-bgcolor: #{$text-bgcolor};
-$menu-shadow: 0px 0px 6px #00000024;
-
+$menu-shadow: 6px #00000024;
 $divider-line-color: #EAEAEA;
-
 $chat-list-bgcolor: #FBFBFB;
 $chat-list-current-bgcolor: #E4EDFD;
 $chat-message-font: #{$font-weight-regular} 12px / 15px #{$font-body};
@@ -34,11 +32,9 @@ $chat-message-inverse-bgcolor: #52525280;
 $chat-message-my-bgcolor: #E4EDFD;
 $chat-message-my-color: #{$chat-message-color};
 $chat-message-my-time-color: #{$button-bgcolor};
-
 $dialog-bgcolor: #{$text-bgcolor};
 $dialog-shadow: #{$menu-shadow};
 $dialog-modal-overlay-bgcolor: #0006;
 $dialog-modal-content-shadow: #{$menu-shadow};
 $dialog-modal-title: #{$font-weight-regular} 15px / 20px #{$font-body};
-
 $gray-light-color: #EFEFEF;

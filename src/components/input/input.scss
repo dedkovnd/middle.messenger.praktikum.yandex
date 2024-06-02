@@ -2,15 +2,18 @@
 
 .input {
   padding-bottom: 10px;
+
   &__wrap {
     height: 26px;
     margin-top: 8px;
     border-bottom: 1px solid $link-color;
   }
+
   &__title {
     font: $font-nano;
     color: $text-light-color;
   }
+  
   &__title__user {
     display: block;
     color: $text-color;
@@ -20,7 +23,7 @@
   }
 }
 
-.input__wrap__error {
+.input-wrap-error {
   height: 26px;
   margin-top: 8px;
   border: 1px solid $text-red;

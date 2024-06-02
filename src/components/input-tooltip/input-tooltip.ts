@@ -8,7 +8,7 @@ class InputTooltip extends Block {
       }
     render(): string {
         return (`
-            <div class="text-error{{#if error}}__active{{/if}}{{#if errorUser}}__active__user{{/if}}">{{errorText}}</div>
+            <div class="text-error{{#if error}}-active{{/if}}{{#if errorUser}}-active__user{{/if}}">{{errorText}}</div>
         `)
     }
 }

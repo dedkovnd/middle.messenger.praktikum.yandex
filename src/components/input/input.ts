@@ -34,7 +34,7 @@ class Input extends Block {
         return `
         <div class="input{{#if className}} {{className}}{{/if}}">
           <label class="input__title{{#if user}}__user{{/if}}">{{ title }}</label>
-          <div class="input__wrap{{#if error}}__error{{/if}}">
+          <div class="input-wrap{{#if error}}-error{{/if}}">
             {{{ InputField }}}
           </div>
           {{{ InputTooltip }}}

@@ -9,6 +9,8 @@
 
 Компанда npm run start собирает проект и запускает сервер http://localhost:3000/
 
-Навигация в рамках по меню на странице авторизации
+Навигация по меню на странице авторизации\
+возникла проблема с деплоем https://dancing-chebakia-c13d11.netlify.app/ устраняю
 
-ссылка на netlify https://eloquent-khapse-1b5b53.netlify.app/
+<img width="1007" alt="deploy 2024-06-02" src="https://github.com/dedkovnd/middle.messenger.praktikum.yandex/assets/52658250/c3ee88dd-4375-4aeb-b116-94b1e8e3d7d9">
+

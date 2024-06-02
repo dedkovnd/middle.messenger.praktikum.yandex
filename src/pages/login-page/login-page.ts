@@ -76,7 +76,8 @@ export default class LoginPage extends Block {
     render() {
         return (`
         <main>
-        {{#> Dialog }}
+        {{{NavigateNav}}}
+        <div class="dialog">
         <form class="login-page">
             <div class="login-page__content">
               {{{ AuthTitle }}}
@@ -88,7 +89,7 @@ export default class LoginPage extends Block {
               {{{ ButtonReg }}}
             </div>
         </form>    
-        {{/ Dialog }}    
+        </div>
         </main>
         `)
     }

@@ -1,25 +1,21 @@
 import Block from "../../tools/Block";
 
-class Navigate extends Block {
-    constructor({...props}) {
-        super({
-            ...props
-        })
-    }
+export default class Navigate extends Block {
+  constructor({ ...props }) {
+    super({
+      ...props,
+    });
+  }
 
-    render(): string {
-        return `
-        <nav class="navigation">
-            <ul class="navigation__list">
-                <li class="list-item"><a class="nav-link" href="#" page="registration">Регистрация</a></li>
-                <li class="list-item"><a class="nav-link" href="#" page="chat">Чат</a></li>
-                <li class="list-item"><a class="nav-link" href="#" page="profile">Профиль</a></li>
-                <li class="list-item"><a class="nav-link" href="#" page="error">404</a></li>
-                <li class="list-item"><a class="nav-link" href="#" page="error500">500</a></li>
-            </ul>
-        </nav>
-        `
-    }
+  render() {
+    return `
+        <div class="navigation">
+        <div class="list-item"><a class="nav-link" href="#" page="registration">Регистрация</a></div>
+        <div class="list-item"><a class="nav-link" href="#" page="chat">Чат</a></div>
+        <div class="list-item"><a class="nav-link" href="#" page="profile">Профиль</a></div>
+        <div class="list-item"><a class="nav-link" href="#" page="profileedit">Редактировать профиль</a></div>
+        <div class="list-item"><a class="nav-link" href="#" page="error">Страница ошибки</a></div>
+        </div>
+        `;
+  }
 }
-
-export default Navigate;

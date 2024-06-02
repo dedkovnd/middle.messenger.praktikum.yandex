@@ -44,4 +44,15 @@ function navigate(page: string) {
   container!.innerHTML = Handlebars.compile(source)(context);
 }
 
-document.addEventListener('DOMContentLoaded', () => navigate('chat'));
+document.addEventListener('DOMContentLoaded', () => navigate('login'));
+
+document.addEventListener('click', e => {
+  //@ts-ignore
+  const page = e.target.getAttribute('page');
+  if (page) {
+    navigate(page);
+
+    e.preventDefault();
+    e.stopImmediatePropagation();
+  }
+});

@@ -27,8 +27,8 @@ export default class Block {
       FLOW_RENDER: "flow:render"
     } as const;
   
-  _element = null;
-  _meta = null;
+  _element: HTMLElement | null = null;
+  _meta: any
   _id = Math.floor(100000 + Math.random() * 900000);
   props: Props
   children: Children
@@ -41,7 +41,7 @@ export default class Block {
      * @returns {void}
      */
 
-  private _eventbus;
+  // private _eventbus;
 
   constructor(propsWithChildren = {}) {
     const eventBus = new EventBus<TEvents>();
@@ -64,7 +64,7 @@ export default class Block {
     const {events = {}} = this.props;
 
     Object.keys(events).forEach(eventName => {
-      this._element.addEventListener(eventName, events[eventName]);
+      this._element?.addEventListener(eventName, events[eventName]);
   })
  }
   
@@ -100,13 +100,13 @@ export default class Block {
     });
   }
   
-  componentDidMount(oldProps: Props) {}
+  componentDidMount() {}
   
   dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
   
-  _componentDidUpdate(oldProps: Props, newProps: Props) {
+  _componentDidUpdate(oldProps?: Props, newProps?: Props) {
     console.log('CDU')
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
@@ -115,13 +115,14 @@ export default class Block {
     this._render();
   }
   
-  componentDidUpdate(oldProps: Props, newProps: Props) {
+  componentDidUpdate(oldProps?: Props, newProps?: Props) {
+    oldProps = { ...oldProps, ...newProps }
     return true;
   }
 
   _getChildrenAndProps(propsAndChildren: PropsAndChildren) {
-    const children = {};
-    const props = {};
+    const children: Children = {}
+    const props: Props = {}
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
     if (value instanceof Block) {
@@ -134,7 +135,7 @@ export default class Block {
     return { children, props };
   }
  
-  setProps = nextProps => {
+  setProps = (nextProps: Partial<Props>) => {
     if (!nextProps) {
       return;
     }
@@ -153,11 +154,12 @@ export default class Block {
         propsAndStubs[key] = `<div data-id="${child._id}"></div>`
     });
 
-    const childrenProps = [];
+    const childrenProps: Props[] = [];
     Object.entries(propsAndStubs).forEach(([key, value]) => {
       if(Array.isArray(value)) {
         propsAndStubs[key] = value.map((item) => {
           if(item instanceof Block) {
+            //@ts-ignore
             childrenProps.push(item)
             return `<div data-id="${item._id}"></div>`
           }
@@ -166,14 +168,14 @@ export default class Block {
         }).join('')
       }
   });
-    const fragment = this._createDocumentElement('template');
+    const fragment: HTMLElement | any = this._createDocumentElement('template');
 
     fragment.innerHTML = Handlebars.compile(this.render())(propsAndStubs);
     const newElement = fragment.content.firstElementChild;
 
     [...Object.values(this.children), ...childrenProps].forEach(child => {
         const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-        
+        //@ts-ignore
         stub?.replaceWith(child.getContent());
     });
 
@@ -205,17 +207,17 @@ export default class Block {
     return this.element;
   }
 
-  _makePropsProxy(props) {
+  _makePropsProxy(props: Props) {
     // Можно и так передать this
     // Такой способ больше не применяется с приходом ES6+
     const self = this;
   
     return new Proxy(props, {
-      get(target, prop) {
+      get(target, prop: string) {
         const value = target[prop];
         return typeof value === "function" ? value.bind(target) : value;
       },
-      set(target, prop, value) {
+      set(target, prop: string, value) {
         const oldTarget = {...target}
         target[prop] = value;
   

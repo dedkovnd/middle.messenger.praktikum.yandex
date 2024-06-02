@@ -1,6 +1,5 @@
 export { Button } from './button';
 export { ChatItem } from './chat-item';
-export { Dialog } from './dialog';
 export { InputField } from './input-field';
 export { Input } from './input';
 export { Link } from './link';

@@ -67,6 +67,14 @@ export default class Block {
       this._element?.addEventListener(eventName, events[eventName]);
   })
  }
+
+  _removeEvents() {
+    const {events = {}} = this.props ;
+
+    Object.keys(events).forEach(eventName => {
+      this._element?.removeEventListener(eventName, events[eventName]);
+  })
+ }
   
   _registerEvents(eventBus: EventBus<TEvents>) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));

@@ -9,9 +9,11 @@ enum METHOD {
 type Options = {
     method: METHOD;
     data?: any;
+    timeout?: number
 };
 
-type OptionsWithoutMethod = Omit<Options, 'method'>;
+
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown>
 
 export class HTTPTransport {
     private apiUrl: string = ''
@@ -19,15 +21,23 @@ export class HTTPTransport {
         this.apiUrl = `local${apiPath}`;
     }
 
-    get<TResponse>(url: string, options: OptionsWithoutMethod = {}): Promise<TResponse> {
-        return this.request<TResponse>(`${this.apiUrl}${url}`, {...options, method: METHOD.GET});
-    };
+    get: HTTPMethod = (url, options ) => (
+        this.request(url, {...options, method: METHOD.GET}, options?.timeout)
+      )
+      
+    put: HTTPMethod = (url, options ) => (
+        this.request(url, {...options, method: METHOD.PUT}, options?.timeout)
+      )
+      
+    post: HTTPMethod = (url, options ) => (
+        this.request(url, {...options, method: METHOD.POST}, options?.timeout)
+      )
 
-    post<TResponse>(url: string, options: OptionsWithoutMethod = {}): Promise<TResponse> {
-        return this.request<TResponse>(`${this.apiUrl}${url}`, {...options, method: METHOD.POST});
-    };
+    delete: HTTPMethod = (url, options ) => (
+        this.request(url, {...options, method: METHOD.DELETE}, options?.timeout)
+      )
 
-    async request<TResponse>(url: string, options: Options = { method: METHOD.GET }): Promise<TResponse> {
+    async request<TResponse>(url: string, options: Options = { method: METHOD.GET }, timeout: any): Promise<TResponse> {
         const {method, data} = options;
 
         const response = await fetch(url, {

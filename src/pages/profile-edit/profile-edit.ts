@@ -11,7 +11,7 @@ export default class ProfileEdit extends Block {
         const onSecondNameBind = this.onValid.bind(this)
         const onChatNameBind = this.onValid.bind(this)
         const onPhoneBind = this.onValid.bind(this)
-
+        //атрибут name указан после value
         const InputMail = new Input({title: 'Почта', className: 'input-user', user: true, errorUser: false,
             onBlur: ()=>onMailBind(event, validateMail, 'InputMail'), value: 'yandex@pochta.ru', name: 'mail'
         })

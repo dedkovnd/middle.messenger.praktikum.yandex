@@ -1,0 +1,12 @@
+<main class="main-chat">
+  <div class="chat-page">
+  <div class="chat-page__list">
+    <div class="chat-page__profile">
+      {{> Link page="profile" text="Профиль"}}
+    </div>
+    {{#each (chat-page-list)}}
+      {{> ChatItem }}
+    {{/each}}
+   </div> 
+  </div>
+</main>

@@ -1,0 +1,15 @@
+@import "../../assets/variables";
+
+.input-field {
+  outline: none;
+  border: none;
+  padding-left: 4px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+.input-field:focus {
+  border: 1px solid $link-color;
+}

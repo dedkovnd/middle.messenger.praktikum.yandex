@@ -13,7 +13,7 @@ export default class ProfileEdit extends Block {
         const onPhoneBind = this.onValid.bind(this)
         //атрибут name указан после value
         const InputMail = new Input({title: 'Почта', className: 'input-user', user: true, errorUser: false,
-            onBlur: ()=>onMailBind(event, validateMail, 'InputMail'), value: 'yandex@pochta.ru', name: 'mail'
+            onBlur: ()=>onMailBind(event, validateMail, 'InputMail'), value: 'yandex@pochta.ru', name: 'email'
         })
         const InputLogin = new Input({title: 'Логин', className: 'input-user', user: true, errorUser: false,
             onBlur: ()=>onLoginBind(event, validateLogin, 'InputLogin'), value: 'ivanivanov', name: 'login'
@@ -25,7 +25,7 @@ export default class ProfileEdit extends Block {
             onBlur: ()=>onSecondNameBind(event, validateName, 'InputSecondName'), value: 'Иванов', name: 'second_name'
         })
         const InputChatName = new Input({title: 'Имя в чате', className: 'input-user', user: true, errorUser: false,
-            onBlur: ()=>onChatNameBind(event, validateName, 'InputChatName'), value: 'Иван', name: 'chat_name'
+            onBlur: ()=>onChatNameBind(event, validateName, 'InputChatName'), value: 'Иван', name: 'display_name'
         })
         const InputPhone = new Input({title: 'Телефон', className: 'input-user', user: true, errorUser: false,
             onBlur: ()=> onPhoneBind(event, validatePhone, 'InputPhone'), value: '+7-999-212-85-06', name: 'phone'

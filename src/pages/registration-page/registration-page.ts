@@ -15,7 +15,7 @@ export default class RegistrationPage extends Block {
         const RegTitle = new PageTitle({title: 'Регистрация'})
         const ButtonReg = new Button({text: 'Зарегистрироваться', type: 'submit', onClick: onButtonReg});
         const ButtonEnter = new Button({text: 'Войти', className: 'button__white'});
-        const InputMail = new Input({title: 'Почта', name: 'mail', type: 'mail', error: false, value: '',
+        const InputMail = new Input({title: 'Почта', name: 'email', type: 'mail', error: false, value: '',
           onBlur: ()=>onMailBind(event, validateMail, 'InputMail')})
         const InputLogin = new Input({title: 'Логин', name: 'login', error: false, value: '',
           onBlur: ()=>onLoginBind(event, validateLogin, 'InputLogin')

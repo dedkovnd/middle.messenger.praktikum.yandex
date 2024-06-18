@@ -1,8 +1,9 @@
 import Block from "../../tools/Block";
 import { Button, Input, Navigate, PageTitle } from "../../components";
 import { validateLogin, validatePassword } from "../../tools/Validators";
+import { connect } from "../../utils/connect";
 
-export default class LoginPage extends Block {
+class LoginPage extends Block {
     init() {
         const onLoginBind = this.onClick.bind(this);
         const onAuthBind = this.onValid.bind(this)
@@ -94,3 +95,7 @@ export default class LoginPage extends Block {
         `)
     }
 }
+//@ts-ignore
+const mapStateToPropsShort = ({loginField, isLoading, loginError}) => ({loginField, isLoading, loginError})
+
+export default connect(mapStateToPropsShort)(LoginPage)

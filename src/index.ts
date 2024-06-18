@@ -22,37 +22,32 @@ Object.entries(Components).forEach(([ name, component ]) => {
   Handlebars.registerPartial(name, component);
 });
 
-// function navigate(page) {
-//   const [ source, args ] = pages[page];
-//   const handlebarsFunct = Handlebars.compile(source);
-//   document.body.innerHTML = handlebarsFunct(args);
+
+// function navigate(page: string) {
+//   //@ts-ignore
+//   const [ source, context ] = pages[page];
+//   const container = document.getElementById('app');
+
+//   if(source instanceof Object) {
+//     const page = new source(context);
+//     container!.innerHTML = '';
+//     container!.append(page.getContent());
+//     // page.dispatchComponentDidMount();
+//     return;
+//   }
+
+//   container!.innerHTML = Handlebars.compile(source)(context);
 // }
 
-function navigate(page: string) {
-  //@ts-ignore
-  const [ source, context ] = pages[page];
-  const container = document.getElementById('app');
+// document.addEventListener('DOMContentLoaded', () => navigate('login'));
 
-  if(source instanceof Object) {
-    const page = new source(context);
-    container!.innerHTML = '';
-    container!.append(page.getContent());
-    // page.dispatchComponentDidMount();
-    return;
-  }
+// document.addEventListener('click', e => {
+//   //@ts-ignore
+//   const page = e.target.getAttribute('page');
+//   if (page) {
+//     navigate(page);
 
-  container!.innerHTML = Handlebars.compile(source)(context);
-}
-
-document.addEventListener('DOMContentLoaded', () => navigate('login'));
-
-document.addEventListener('click', e => {
-  //@ts-ignore
-  const page = e.target.getAttribute('page');
-  if (page) {
-    navigate(page);
-
-    e.preventDefault();
-    e.stopImmediatePropagation();
-  }
-});
+//     e.preventDefault();
+//     e.stopImmediatePropagation();
+//   }
+// });

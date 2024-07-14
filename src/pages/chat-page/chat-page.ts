@@ -47,10 +47,11 @@ class Chatpage extends Block {
       }
       let data = null
       if (window.store.state.users.length === 0) {
-        data = window.store.state.chats.map(e => ({id: e.id, name: e.last_message.user.login, message: e.last_message.content}))
+        data = window.store.state.chats.map((e: any) => ({id: e.id, name: e.last_message.user.login, message: e.last_message.content}))
       } else {
-         data = window.store.state.users.map(e => ({id: e.id, name: e.login, message: ''}))
+         data = window.store.state.users.map((e: any) => ({id: e.id, name: e.login, message: ''}))
       }
+      //@ts-ignore
       this.children.List.setProps({cards: data?.map(({id, name, message}) =>  new ChatItem({id, name, message}))})
       
       let arr = []
@@ -59,7 +60,7 @@ class Chatpage extends Block {
       }
       if (window.store.state.messages.length !== 0) {
         console.log(window.store.state.me)
-        arr.push(...window.store.state.messages.map(e => ({message: e.content, me: ()=>checkMe(window.store.state.me.id, e.user_id)})))
+        arr.push(...window.store.state.messages.map((e: any) => ({message: e.content, me: ()=>checkMe(window.store.state.me.id, e.user_id)})))
       }
       this.children.Messages.setProps({messages: arr?.map(({message, me}) => new Message({message, me}))})
     }
@@ -68,6 +69,7 @@ class Chatpage extends Block {
       let timeout: number;
       return function() {
         const args = arguments;
+        //@ts-ignore
         const fnCall = () => {func.apply(this, args)}
         clearTimeout(timeout);
         timeout = setTimeout(fnCall, delay);
@@ -92,6 +94,7 @@ class Chatpage extends Block {
       createWebSocket(userID, meID, message)
       this.children.InputMessage.setProps({value: ''})
       const input = document.getElementById('messageID')
+      //@ts-ignore
       input.value = ''
     }
 
@@ -127,5 +130,5 @@ class Chatpage extends Block {
 }
 //@ts-ignore
 const mapStateToPropsShort = ({chats, selectedChat, isLoading, loginError, messages}) => ({chats, selectedChat, isLoading, loginError, messages})
-
+//@ts-ignore
 export default connect(mapStateToPropsShort)(Chatpage)

@@ -67,7 +67,7 @@ class ProfileEdit extends Block {
 
     onLoad(e: Event) {
       const formData = new FormData()
-      formData.append('avatar', (e?.target as HTMLInputElement).files[0])
+      formData.append('avatar', (e?.target as HTMLInputElement).files![0])
       putPhoto(formData)
     }
 

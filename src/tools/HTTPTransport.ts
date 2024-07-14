@@ -7,7 +7,7 @@ enum METHOD {
 };
 
 type Options = {
-    method: METHOD;
+    method?: METHOD;
     data?: any;
     timeout?: number
 };
@@ -37,7 +37,7 @@ export class HTTPTransport {
     delete: HTTPMethod = (url, options ) => (
         this.request(this.apiUrl + url, {...options, method: METHOD.DELETE}, options?.timeout)
       )
-
+    //@ts-ignore
     async request<TResponse>(url: string, options: Options = { method: METHOD.GET }, timeout: any): Promise<TResponse> {
         let {method, data} = options;
         if (data instanceof FormData) {

@@ -6,6 +6,7 @@ export const login = async (model: any) => {
     window.store.set({isLoading: true})
     try {
         await authApi.login(model);
+        //@ts-ignore
         window.router.go('/messenger')
         
     } catch (error) {
@@ -19,6 +20,7 @@ export const create = async (model: any) => {
     window.store.set({isLoading: true})
     try{
         await authApi.create(model)
+        //@ts-ignore
         window.router.go('/messenger')
     } catch (error) {
         window.store.set({loginError: 'some error'})

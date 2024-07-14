@@ -32,6 +32,7 @@ class LoginPage extends Block {
 
     onClear(e: Event) {
        e.preventDefault()
+       //@ts-ignore
        window.router.go('/sign-up')
     }
 

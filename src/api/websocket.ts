@@ -9,7 +9,7 @@ export const createWebSocket = async (chatid: number, id: number, value: string 
         return await chatsApi.getChatToken(chatid)
     }
     const tokenID = await token(chatid)
-
+    //@ts-ignore
     const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${id}/${chatid}/${tokenID.token}`);
 
     socket.addEventListener('open', () => {
@@ -44,5 +44,3 @@ export const createWebSocket = async (chatid: number, id: number, value: string 
         console.log('Ошибка', event);
       }); 
 }
-
-

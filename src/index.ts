@@ -8,17 +8,9 @@ import { Store } from './tools/Store';
 declare global {
   export type Keys<T extends Record<string, unknown>> = keyof T;
   export type Values<T extends Record<string, unknown>> = T[Keys<T>]
+  interface Window {store: any}
 }
 
-
-const pages = {
-  'chat': [ Pages.ChatPage ],
-  'login': [ Pages.LoginPage ],
-  'registration': [Pages.RegistrationPage],
-  'profile': [Pages.ProfilePage],
-  'error': [Pages.ErrorPage],
-  'profileedit': [Pages.ProfileEdit]
-};
 
 Object.entries(Components).forEach(([ name, component ]) => {
   //@ts-ignore
@@ -28,7 +20,6 @@ Object.entries(Components).forEach(([ name, component ]) => {
 const router = new Router('#app');
 //@ts-ignore
 window.router = router;
-// //@ts-ignore
 window.store = new Store({
   isLoading: false,
   loginError: null,
@@ -39,7 +30,6 @@ window.store = new Store({
   selectedChat: null,
   messages: []
 });
-
 
 router.use('/', Pages.LoginPage)
 .use('/messenger', Pages.ChatPage)

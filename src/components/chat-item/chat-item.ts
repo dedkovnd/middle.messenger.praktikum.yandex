@@ -21,6 +21,7 @@ class ChatItem extends Block {
       }
     
       render() {
+        //@ts-ignore
         const isActive = this.props.selectedChat?.id === this.props.id
           return(`
         <div class="chat-item{{#if ${isActive}}}__active{{/if}}">

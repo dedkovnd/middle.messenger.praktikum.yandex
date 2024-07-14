@@ -5,7 +5,7 @@ export default class ErrorPage extends Block {
     init () {
         const ErrorTitle = new PageTitle({title: '404', className: 'page-title__error'})
         const Description = new ErrorDescription({text: 'Не туда попали'})
-        const Link404 = new Link({text: 'Назад к чатам'})
+        const Link404 = new Link({text: 'Назад к чатам', url: '/messenger'})
         
         this.children = {
             ...this.children,

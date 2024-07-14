@@ -1,9 +1,15 @@
 import Block from "../../tools/Block";
-import { PageTitle, Backspace, UserData, UserOption } from "../../components";
+import { PageTitle, Backspace, UserData, UserOption, UserImage } from "../../components";
+import { connect } from "../../utils/connect";
+import { me } from "../../services/auth";
 
-export default class ProfilePage extends Block {
+class ProfilePage extends Block {
+    componentDidMount() {
+        me()
+    }
     init() {
-        const ProfileTitle = new PageTitle({title: 'Иван'})
+        const MyImage = new UserImage({tooltip: false, url: ''})
+        const ProfileTitle = new PageTitle({title: 'Ivan'})
         const BackToChat = new Backspace({})
         const UserMail = new UserData({name: 'Почта', value: 'yandex@pochta.ru'})
         const UserLogin = new UserData({name: 'Логин', value: 'ivanivanov'})
@@ -11,7 +17,7 @@ export default class ProfilePage extends Block {
         const UserSecondName = new UserData({name: 'Фамилия', value: 'Иванов'})
         const UserChatName = new UserData({name: 'Имя в чате', value: 'Иван'})
         const UserPhone = new UserData({name: 'Телефон', value: '+7 999 212 85 06'})
-        const DataOption = new UserOption({text: 'Изменить данные', page: 'profileedit'})
+        const DataOption = new UserOption({text: 'Изменить данные', url: '/settings-edit'})
         const PasswordOption = new UserOption({text: 'Изменить пароль'})
         const ExitOption = new UserOption({text: 'Выйти', className: 'user-option__red'})
 
@@ -27,9 +33,21 @@ export default class ProfilePage extends Block {
             UserName,
             UserSecondName,
             UserChatName,
-            UserPhone
+            UserPhone,
+            MyImage
         }
     
+    }
+    //@ts-ignore
+    componentDidUpdate() {
+      this.children.MyImage.setProps({url: window.store.state.me.avatar})
+      this.children.ProfileTitle.setProps({title: window.store.state.me.first_name})
+      this.children.UserMail.setProps({value: window.store.state.me.email})
+      this.children.UserLogin.setProps({value: window.store.state.me.login})
+      this.children.UserName.setProps({value: window.store.state.me.first_name})
+      this.children.UserSecondName.setProps({value: window.store.state.me.second_name})
+      this.children.UserChatName.setProps({value: window.store.state.me.display_name})
+      this.children.UserPhone.setProps({value: window.store.state.me.phone})
     }
 
     render() {
@@ -37,7 +55,7 @@ export default class ProfilePage extends Block {
         <main class="main">
         {{{ BackToChat }}}
           <div class="profile-page">
-            <div class="user-image"></div>
+            {{{MyImage}}}
               {{{ ProfileTitle }}}
             <div class="info-wrap">
               {{{ UserMail }}}
@@ -57,3 +75,5 @@ export default class ProfilePage extends Block {
         `)
     }
 }
+//@ts-ignore
+export default connect(({me}) => ({me}))(ProfilePage);

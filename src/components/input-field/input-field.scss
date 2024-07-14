@@ -3,6 +3,7 @@
 .input-field {
   outline: none;
   border: none;
+  border-bottom: 1px solid $link-color;
   padding-left: 4px;
   width: 100%;
   height: 100%;
@@ -12,4 +13,20 @@
 
 .input-field:focus {
   border: 1px solid $link-color;
+}
+
+.input-field-message {
+  outline: none;
+  border: none;
+  border-radius: 5%;
+  background-color: $divider-line-color;
+  width: 600px;
+  margin-left: 15px;
+}
+
+.input-field-image {
+  opacity: 0;
+  z-index: -1;
+  height: 100px;
+  width: 100px;
 }

@@ -2,6 +2,7 @@ import Block from "../../tools/Block";
 import { Button, Input, Navigate, PageTitle } from "../../components";
 import { validateLogin, validatePassword } from "../../tools/Validators";
 import { connect } from "../../utils/connect";
+import { login } from "../../services/auth";
 
 class LoginPage extends Block {
     init() {
@@ -31,6 +32,7 @@ class LoginPage extends Block {
 
     onClear(e: Event) {
        e.preventDefault()
+       window.router.go('/sign-up')
     }
 
     onValid(e: Event | undefined, validator: Function, input: string) {
@@ -70,7 +72,9 @@ class LoginPage extends Block {
         if (data.filter(e=> e.error === true).length === 0) {
           const object = data.reduce(
             (obj, item: any) => Object.assign(obj, { [item.name]: item.value }), {})
-            console.log(object)
+            //@ts-ignore
+            window.store.set({loginField: object})
+            login(this.props.loginField)
         }
     }
 
@@ -89,7 +93,7 @@ class LoginPage extends Block {
               {{{ ButtonLogin }}}
               {{{ ButtonReg }}}
             </div>
-        </form>    
+        </form>
         </div>
         </main>
         `)

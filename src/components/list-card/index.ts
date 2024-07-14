@@ -1,1 +1,1 @@
-export { default as ListCard} from './list-card'
+export { default as ListCard } from './list-card'

@@ -1,17 +1,31 @@
 import Block from "../../tools/Block";
+import { connect } from "../../utils/connect";
 
-export default class ChatItem extends Block {
+class ChatItem extends Block {
     constructor({...props}) {
         super({
           ...props,
+          active: props.activeId === props.id,
+            events: {
+                click: () => {
+                    const card = {
+                        name: props.name,
+                        id: props.id,
+                        message: props.message
+                    }
+                    window.store.set({selectedChat: card})
+                }
+            }
+          
         })
       }
     
       render() {
+        const isActive = this.props.selectedChat?.id === this.props.id
           return(`
-        <div class="chat-item">
+        <div class="chat-item{{#if ${isActive}}}__active{{/if}}">
           <div class="chat-item__line"></div>
-          <div class="chat-item__block{{#if current}} chat-item__block--current{{/if}}">
+          <div class="chat-item__block">
             <div>{{name}}</div>
             {{#if avatar}}
             <div>
@@ -27,3 +41,5 @@ export default class ChatItem extends Block {
           `)
       }
 }
+//@ts-ignore
+export default connect(({selectedChat}) => ({selectedChat}))(ChatItem);

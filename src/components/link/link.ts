@@ -9,7 +9,7 @@ export default class Link extends Block {
     
       render(){
         return(`
-        <a href="{{ url }}" class="link{{#if className}} {{className}}{{/if}}" page='{{ page }}'>{{ text }}</a>
+        <a href='{{ url }}' class="link{{#if className}} {{className}}{{/if}}" page='{{ page }}'>{{ text }}</a>
         `)
       }
 }

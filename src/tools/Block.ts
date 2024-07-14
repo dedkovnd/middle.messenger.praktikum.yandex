@@ -101,7 +101,7 @@ export default class Block {
   
   _componentDidMount() {
     this.componentDidMount();
-    console.log('CDM')
+    // console.log('CDM')
 
     Object.values(this.children).forEach(child => {
         child.dispatchComponentDidMount();
@@ -115,7 +115,7 @@ export default class Block {
   }
   
   _componentDidUpdate(oldProps?: Props, newProps?: Props) {
-    console.log('CDU')
+    // console.log('CDU')
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -242,6 +242,14 @@ export default class Block {
   _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
+  }
+
+  show() {
+    this.getContent()!.style.display = "block";
+  }
+  
+  hide() {
+    this.getContent()!.style.display = "none";
   }
   
   }

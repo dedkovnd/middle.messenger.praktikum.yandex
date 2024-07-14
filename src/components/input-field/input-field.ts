@@ -8,7 +8,13 @@ class InputField extends Block {
     render(): string {
         return `
         <input
-        class="input-field{{#if className}} {{className}}{{/if}}" value="{{value}}" name="{{name}}">
+        type="{{type}}"
+        class="input-field{{#if message}}-message{{/if}}{{#if image}}-image{{/if}}" 
+        value="{{value}}" 
+        name="{{name}}"
+        placeholder="{{placeholder}}"
+        id="{{id}}"
+        >
         `
     }
 }

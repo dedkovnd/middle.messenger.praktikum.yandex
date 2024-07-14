@@ -13,7 +13,7 @@ class Button extends Block {
 
     render(): string {
         return `
-        <button class="button{{#if className}} {{className}}{{/if}}" type="{{type}}">
+        <button id="{{id}}" class="button{{#if className}} {{className}}{{/if}}" type="{{type}}">
         {{ text }}
         </button>
       `

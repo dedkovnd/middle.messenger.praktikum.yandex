@@ -10,7 +10,7 @@ export default class Backspace extends Block {
     render(){
         return(`
         <div class="backspace">
-          <div class="backspace__triangle" page='chat'></div>
+          <a href='/messenger'><div class="backspace__triangle" page='chat'></div></a>
         </div>
         `)
     }  

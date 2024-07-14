@@ -1,6 +1,9 @@
 @import '../../assets/variables';
 
 .chat-item {
+  &__active {
+    background-color: $chat-list-current-bgcolor;
+  }
   &__line {
     height: 1px;
     background: $divider-line-color;
@@ -20,11 +23,6 @@
     padding: 12px 10px;
     box-sizing: border-box;
     cursor: pointer;
-
-    &--current {
-      background: $chat-list-current-bgcolor;
-      cursor: default;
-    }
   }
 
   &__avatar {

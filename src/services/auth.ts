@@ -2,16 +2,39 @@ import AuthApi from "../api/auth";
 
 const authApi = new AuthApi();
 
-export const login = async (model) => {
-    window.store.set({isLoading: true});
+export const login = async (model: any) => {
+    window.store.set({isLoading: true})
     try {
         await authApi.login(model);
-        window.router.go('/cats')
+        window.router.go('/messenger')
         
     } catch (error) {
-        window.store.set({loginError: 'some error'});
+        window.store.set({loginError: 'some error'})
     } finally {
-        window.store.set({isLoading: false});
+        window.store.set({isLoading: false})
     }
+}
 
+export const create = async (model: any) => {
+    window.store.set({isLoading: true})
+    try{
+        await authApi.create(model)
+        window.router.go('/messenger')
+    } catch (error) {
+        window.store.set({loginError: 'some error'})
+    } finally {
+        window.store.set({isLoading: false})
+    }
+}
+
+export const me = async () => {
+    window.store.set({isLoading: true})
+    try{
+        const me = await authApi.me()
+        window.store.set({me})
+    } catch (error) {
+        window.store.set({loginError: 'some error'})
+    } finally {
+        window.store.set({isLoading: false})
+    }
 }

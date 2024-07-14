@@ -1,6 +1,9 @@
 import Handlebars from 'handlebars';
 import * as Components from './components';
 import * as Pages from './pages';
+import Router from './tools/Router';
+import { Store } from './tools/Store';
+
 
 declare global {
   export type Keys<T extends Record<string, unknown>> = keyof T;
@@ -22,32 +25,27 @@ Object.entries(Components).forEach(([ name, component ]) => {
   Handlebars.registerPartial(name, component);
 });
 
+const router = new Router('#app');
+//@ts-ignore
+window.router = router;
+// //@ts-ignore
+window.store = new Store({
+  isLoading: false,
+  loginError: null,
+  chats: [],
+  me: null,
+  user: null,
+  users: [],
+  selectedChat: null,
+  messages: []
+});
 
-// function navigate(page: string) {
-//   //@ts-ignore
-//   const [ source, context ] = pages[page];
-//   const container = document.getElementById('app');
 
-//   if(source instanceof Object) {
-//     const page = new source(context);
-//     container!.innerHTML = '';
-//     container!.append(page.getContent());
-//     // page.dispatchComponentDidMount();
-//     return;
-//   }
-
-//   container!.innerHTML = Handlebars.compile(source)(context);
-// }
-
-// document.addEventListener('DOMContentLoaded', () => navigate('login'));
-
-// document.addEventListener('click', e => {
-//   //@ts-ignore
-//   const page = e.target.getAttribute('page');
-//   if (page) {
-//     navigate(page);
-
-//     e.preventDefault();
-//     e.stopImmediatePropagation();
-//   }
-// });
+router.use('/', Pages.LoginPage)
+.use('/messenger', Pages.ChatPage)
+.use('/settings', Pages.ProfilePage)
+.use('/settings-edit', Pages.ProfileEdit)
+.use('/sign-up', Pages.RegistrationPage)
+.use('*', Pages.ErrorPage)
+.use('/error', Pages.ErrorPage)
+.start();

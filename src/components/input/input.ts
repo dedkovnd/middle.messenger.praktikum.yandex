@@ -13,9 +13,14 @@ class Input extends Block {
             InputField: new InputField({
                 value: props.value,
                 name: props.name,
+                placeholder: props.placeholder,
                 events: {
-                    blur: props.onBlur
-                }
+                    blur: props.onBlur,
+                    input: props.onInput,
+                    change: props.onChange,
+                },
+                message: props.message,
+                id: props.id
             }),
             InputTooltip: new InputTooltip({
                 error: props.errorText
@@ -32,7 +37,7 @@ class Input extends Block {
 
     render(): string {
         return `
-        <div class="input{{#if className}} {{className}}{{/if}}">
+        <div class="input{{#if className}}{{className}}{{/if}}">
           <label class="input__title{{#if user}}__user{{/if}}">{{ title }}</label>
           <div class="input-wrap{{#if error}}-error{{/if}}">
             {{{ InputField }}}

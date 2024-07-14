@@ -22,3 +22,23 @@
     padding-left: 75%;
   }
 }
+
+.input-search {
+  width: 240px;
+  margin-left: -180px;
+}
+
+.chat-wpar {
+  display: flex;
+  flex-direction: column;
+}
+
+.message-wrap {
+  display: flex;
+  width: 100%;
+}
+
+.chatlist-wrap {
+  display: flex;
+  height: 90%;
+}

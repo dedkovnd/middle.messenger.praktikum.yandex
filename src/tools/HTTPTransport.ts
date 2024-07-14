@@ -16,36 +16,42 @@ type Options = {
 type HTTPMethod = (url: string, options?: Options) => Promise<unknown>
 
 export class HTTPTransport {
-    private apiUrl: string = ''
-    constructor(apiPath: string) {
-        this.apiUrl = `local${apiPath}`;
+  private apiUrl : string
+    constructor(apiPath :string) {
+        this.apiUrl = apiPath;
     }
-
-    get: HTTPMethod = (url, options ) => (
-        this.request(url, {...options, method: METHOD.GET}, options?.timeout)
+    
+    get: HTTPMethod = (url, options) => (
+        this.request(this.apiUrl + url, {...options, method: METHOD.GET}, options?.timeout)
       )
+
       
     put: HTTPMethod = (url, options ) => (
-        this.request(url, {...options, method: METHOD.PUT}, options?.timeout)
+        this.request(this.apiUrl + url, {...options, method: METHOD.PUT}, options?.timeout)
       )
       
     post: HTTPMethod = (url, options ) => (
-        this.request(url, {...options, method: METHOD.POST}, options?.timeout)
+        this.request(this.apiUrl + url, {...options, method: METHOD.POST}, options?.timeout)
       )
 
     delete: HTTPMethod = (url, options ) => (
-        this.request(url, {...options, method: METHOD.DELETE}, options?.timeout)
+        this.request(this.apiUrl + url, {...options, method: METHOD.DELETE}, options?.timeout)
       )
 
     async request<TResponse>(url: string, options: Options = { method: METHOD.GET }, timeout: any): Promise<TResponse> {
-        const {method, data} = options;
+        let {method, data} = options;
+        if (data instanceof FormData) {
+          data = data
+        } else {
+          data = JSON.stringify(data)
+        }
 
         const response = await fetch(url, {
             method,
             credentials: 'include',
             mode: 'cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: data ? JSON.stringify(data) : null,
+            // body: data ? JSON.stringify(data) : null,
+            body: data
         });
         
         const isJson = response.headers.get('content-type')?.includes('application/json');

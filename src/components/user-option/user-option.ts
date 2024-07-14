@@ -10,7 +10,7 @@ export default class UserOption extends Block{
     render() {
         return(`
         <div class="user-option{{#if className}} {{className}}{{/if}}" page={{page}}>
-          {{ text }}
+          <a class='user-link' href={{{url}}}>{{ text }}</a>
         </div>
         `)
     }

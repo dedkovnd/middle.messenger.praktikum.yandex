@@ -4,6 +4,7 @@
   &__active {
     background-color: $chat-list-current-bgcolor;
   }
+  
   &__line {
     height: 1px;
     background: $divider-line-color;
@@ -73,4 +74,3 @@
     align-items: center;
   }
 }
-

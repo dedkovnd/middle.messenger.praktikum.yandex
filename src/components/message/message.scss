@@ -1,4 +1,4 @@
-@import '../../assets/variables.scss';
+@import '../../assets/variables';
 
 .message {
     border: 1px solid $text-light-color;
@@ -7,6 +7,7 @@
     padding-right: 10px;
     margin-bottom: 15px;
     background-color: $menu-button-bgcolor;
+
     &__me{
         border: 1px solid $link-color-light;
         padding-left: 10px;
@@ -16,4 +17,3 @@
         width: 100%;
     }
 }
-

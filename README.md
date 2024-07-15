@@ -13,4 +13,4 @@
 
 ссылка на netlify https://sparkly-buttercream-999a44.netlify.app/
 
-
+актуальная ссылка, по ней не работает навигация, пытаюсь поправить https://magnificent-taffy-d7899c.netlify.app/

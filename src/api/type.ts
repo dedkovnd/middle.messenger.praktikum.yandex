@@ -6,13 +6,30 @@ export type SignUpResponse = {
     id: number
 }
 
+export type TSearchUser = {
+    login: string
+}
+
+export type TCreatChat = {
+    title: string
+}
+
+export type TUserUpdate = {
+    email: string | unknown, 
+    login: string | unknown, 
+    first_name: string | unknown, 
+    second_name: string | unknown, 
+    display_name: string | unknown, 
+    phone: string | unknown
+}
+
 export type UserDTO = {
     id: number;
     login: string;
     first_name: string;
     second_name: string;
-    display_name: string;
-    avatar: string;
+    display_name?: string;
+    avatar?: string;
     phone: string;
     email: string;
 };

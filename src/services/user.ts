@@ -1,8 +1,9 @@
 import UserApi from "../api/user";
+import { TUserUpdate, TSearchUser } from "../api/type";
 
 const userApi = new UserApi();
 
-export const loadUsers = async (model: any) => {
+export const loadUsers = async (model: TSearchUser) => {
     window.store.set({isLoading: true});
     try {
         if(model.login.length === 0) {
@@ -20,7 +21,7 @@ export const loadUsers = async (model: any) => {
 
 }
 
-export const updateUser = async (model: any) => {
+export const updateUser = async (model: TUserUpdate) => {
     window.store.set({isLoading: true});
     try {
         await userApi.putUser(model);
@@ -33,7 +34,7 @@ export const updateUser = async (model: any) => {
 
 }
 
-export const putPhoto = async (model: any) => {
+export const putPhoto = async (model: FormData) => {
     window.store.set({isLoading: true});
     try {
         await userApi.putPhoto(model)

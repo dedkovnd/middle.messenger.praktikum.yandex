@@ -1,13 +1,14 @@
 import Block from "../../tools/Block";
 import { PageTitle, Backspace, UserData, UserOption, UserImage } from "../../components";
 import { connect } from "../../utils/connect";
-import { me } from "../../services/auth";
+import { me, logout } from "../../services/auth";
 
 class ProfilePage extends Block {
     componentDidMount() {
         me()
     }
     init() {
+        const LogOutBind = this.onLogout.bind(this)
         const MyImage = new UserImage({tooltip: false, url: ''})
         const ProfileTitle = new PageTitle({title: 'Ivan'})
         const BackToChat = new Backspace({})
@@ -19,7 +20,7 @@ class ProfilePage extends Block {
         const UserPhone = new UserData({name: 'Телефон', value: '+7 999 212 85 06'})
         const DataOption = new UserOption({text: 'Изменить данные', url: '/settings-edit'})
         const PasswordOption = new UserOption({text: 'Изменить пароль'})
-        const ExitOption = new UserOption({text: 'Выйти', className: 'user-option__red'})
+        const ExitOption = new UserOption({text: 'Выйти', className: 'user-option__red', onClick: LogOutBind})
 
         this.children = {
             ...this.children,
@@ -48,6 +49,11 @@ class ProfilePage extends Block {
       this.children.UserSecondName.setProps({value: window.store.state.me.second_name})
       this.children.UserChatName.setProps({value: window.store.state.me.display_name})
       this.children.UserPhone.setProps({value: window.store.state.me.phone})
+    }
+
+    onLogout(e: Event) {
+      e.preventDefault()
+      logout()
     }
 
     render() {

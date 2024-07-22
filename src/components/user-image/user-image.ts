@@ -8,7 +8,7 @@ class UserImage extends Block {
             ...props,
             InputField: new InputField({
                 type: 'file',
-                image: true, 
+                image: true,
                 events: {
                     change: props.onChange
                 },
@@ -18,11 +18,15 @@ class UserImage extends Block {
 
     render(): string {
         return `
-        <div class="user-image" src="https://ya-praktikum.tech/api/v2/resources/{{url}}" alt="user photo" {{#if tooltip}}data-title="Кликните мышкой, чтобы загрузить фото"{{/if}}>
+        <div class="user-image" {{#if tooltip}}data-title="Кликните мышкой, чтобы загрузить фото"{{/if}}>
+          {{#if url}}
           <img class="user-pic" src="https://ya-praktikum.tech/api/v2/resources/{{url}}" alt="user photo">
+          {{/if}}
+          <div class="wrap-image">
           {{#if tooltip}}
           {{{InputField}}}
           {{/if}}
+          </div>
         </div>
         `
     }

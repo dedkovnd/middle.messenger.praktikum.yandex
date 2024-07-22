@@ -58,19 +58,4 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
-  &__unread {
-    grid-area: u;
-    margin-top: 14px;
-    height: 20px;
-    width: 20px;
-    font: $font-micro;
-    background: $button-bgcolor;
-    color: $button-color;
-    place-self: end;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }

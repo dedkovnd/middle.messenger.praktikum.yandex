@@ -11,8 +11,11 @@ class ChatItem extends Block {
                     const card = {
                         name: props.name,
                         id: props.id,
-                        message: props.message
+                        message: props.message,
+                        avatar: props.avatar,
+                        title: props.title
                     }
+                    console.log(card)
                     window.store.set({selectedChat: card})
                 }
             }
@@ -27,15 +30,12 @@ class ChatItem extends Block {
         <div class="chat-item{{#if ${isActive}}}__active{{/if}}">
           <div class="chat-item__line"></div>
           <div class="chat-item__block">
-            <div>{{name}}</div>
+            <div>{{title}}</div>
             {{#if avatar}}
-            <div>
-              <img class="chat-item__avatar" src={{ avatar }} alt="Фото пользователя"><img>
-            </div>
+              <img class="chat-item__avatar" src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Фото чата"><img>
             {{else}}
             <div class="chat-item__avatar"></div>
             {{/if}}
-            <div class="chat-item__avatar"></div>
             <div class="chat-item__message"><span class="chat-item__message-text">{{ message }}</span></div>
           </div>
         </div>
@@ -43,4 +43,4 @@ class ChatItem extends Block {
       }
 }
 //@ts-ignore
-export default connect(({selectedChat}) => ({selectedChat}))(ChatItem);
+export default connect(({selectedChat, chats}) => ({selectedChat, chats}))(ChatItem);

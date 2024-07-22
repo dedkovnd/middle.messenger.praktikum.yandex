@@ -14,3 +14,7 @@ export { Navigate } from './navigate';
 export { ListCard } from './list-card';
 export { ListMessage } from './list-message';
 export { Message } from './message';
+export { ChatOptions } from './chat-options';
+export { ChatOptionsItems } from './chat-options-items';
+export { ChatOptionsActions } from './chat-options-actions';
+export { Modal } from './modal';

@@ -3,7 +3,10 @@ import Block from "../../tools/Block";
 export default class UserOption extends Block{
     constructor({...props}) {
         super({
-            ...props
+            ...props,
+            events: {
+                click: props.onClick
+            }
         })
     }
 

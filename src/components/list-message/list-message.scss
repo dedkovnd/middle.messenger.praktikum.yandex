@@ -1,5 +1,14 @@
+@import '../../assets/variables';
+
 .list-message {
     display: flex;
     flex-direction: column;
-    width: 300px;
+    width: 600px;
+}
+
+.chat-option {
+    padding: 15px 10px 15px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
 }

@@ -24,7 +24,7 @@ class Chatpage extends Block {
         const InputMessage = new Input({message: true, value: '', onChange: onMessageBind, id: 'messageID'})
         const LinkProfile = new Link({text: 'Профиль', url: '/settings'})
         const List = new ListCard({cards: []})
-        const Messages = new ListMessage({messages: []})
+        const Messages = new ListMessage({messages: [], header: 'Чат'})
         this.children = {
           ...this.children,
           //@ts-ignore
@@ -47,22 +47,31 @@ class Chatpage extends Block {
       }
       let data = null
       if (window.store.state.users.length === 0) {
-        data = window.store.state.chats.map((e: any) => ({id: e.id, name: e.last_message.user.login, message: e.last_message.content}))
+        data = window.store.state.chats.map((e: any) => ({id: e.id, 
+          name: e.last_message.user.login, 
+          message: e.last_message.content,
+          avatar: e.avatar,
+          title: e.title
+        }))
       } else {
-         data = window.store.state.users.map((e: any) => ({id: e.id, name: e.login, message: ''}))
+         data = window.store.state.users.map((e: any) => ({id: e.id, name: e.login, message: '', avatar: e.avatar, title: ''}))
       }
       //@ts-ignore
-      this.children.List.setProps({cards: data?.map(({id, name, message}) =>  new ChatItem({id, name, message}))})
+      this.children.List.setProps({cards: data?.map(({id, name, message, avatar, title}) =>  new ChatItem({id, name, message, avatar, title}))})
       
       let arr = []
       if(window.store.state.selectedChat?.message) {
-        arr.push({message: window.store.state.selectedChat.message, me: ()=>checkMe(window.store.state.me.login, window.store.state.selectedChat.name)})
+        arr.push({message: window.store.state.selectedChat.message, 
+          me: ()=>checkMe(window.store.state.me.login, 
+          window.store.state.selectedChat.name)})
       }
       if (window.store.state.messages.length !== 0) {
-        console.log(window.store.state.me)
-        arr.push(...window.store.state.messages.map((e: any) => ({message: e.content, me: ()=>checkMe(window.store.state.me.id, e.user_id)})))
+        arr.push(...window.store.state.messages.map((e: any) => ({message: e.content, 
+          me: ()=>checkMe(window.store.state.me.id, 
+          e.user_id)})))
       }
-      this.children.Messages.setProps({messages: arr?.map(({message, me}) => new Message({message, me}))})
+      this.children.Messages.setProps({messages: arr?.map(({message, me}) => new Message({message, me})), 
+      header: window.store.state.selectedChat?.title})
     }
 
     debounce(func: any, delay: number) {

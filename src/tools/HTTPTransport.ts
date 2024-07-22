@@ -40,18 +40,20 @@ export class HTTPTransport {
     //@ts-ignore
     async request<TResponse>(url: string, options: Options = { method: METHOD.GET }, timeout: any): Promise<TResponse> {
         let {method, data} = options;
+        let includeHeaders = true;
         if (data instanceof FormData) {
           data = data
+          includeHeaders = false;
         } else {
           data = JSON.stringify(data)
         }
 
         const response = await fetch(url, {
-            method,
-            credentials: 'include',
-            mode: 'cors',
-            // body: data ? JSON.stringify(data) : null,
-            body: data
+          method,
+          credentials: 'include',
+          mode: 'cors',
+          headers: includeHeaders ? {'content-type': 'application/json'} : undefined,
+          body: data,
         });
         
         const isJson = response.headers.get('content-type')?.includes('application/json');

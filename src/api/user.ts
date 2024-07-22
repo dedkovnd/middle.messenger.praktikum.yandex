@@ -1,20 +1,20 @@
 import { HTTPTransport } from "../tools/HTTPTransport";
-import { APIError } from "./type";
+import { APIError, TUserUpdate, TSearchUser } from "./type";
 import { BASEURL } from "./const";
 
 
 const userApi = new HTTPTransport(`${BASEURL}/user`);
 
 export default class UserApi {
-    async getUsers(data: any): Promise<any | APIError> {
+    async getUsers(data: TSearchUser): Promise<any | APIError> {
         return userApi.post('/search', {data});
     }
 
-    async putUser(data: any): Promise<any | APIError> {
+    async putUser(data: TUserUpdate): Promise<any | APIError> {
         return userApi.put('/profile', {data});
     }
 
-    async putPhoto(data: any): Promise<any | APIError> {
+    async putPhoto(data: FormData): Promise<any | APIError> {
         return userApi.put('/profile/avatar', {data});
     }
 }

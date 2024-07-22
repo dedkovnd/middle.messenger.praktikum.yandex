@@ -7,6 +7,7 @@
     padding-right: 10px;
     margin-bottom: 15px;
     background-color: $menu-button-bgcolor;
+    width: 60%;
 
     &__me{
         border: 1px solid $link-color-light;
@@ -14,6 +15,6 @@
         padding-right: 10px;
         margin-bottom: 15px;
         background-color: $background-blue;
-        width: 100%;
+        width: 60%;
     }
 }

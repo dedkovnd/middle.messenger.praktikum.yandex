@@ -1,6 +1,5 @@
 @import '../../assets/variables';
 
-
 .options-items {
     position: relative;
     border: 1px solid $text-light-color;
@@ -10,6 +9,7 @@
     padding-left: 10px;
     padding-bottom: 4px;
     margin-top: 5px;
+
     &__hidden {
         display: none;
     }

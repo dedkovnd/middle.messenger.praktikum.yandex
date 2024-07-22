@@ -75,6 +75,7 @@ class LoginPage extends Block {
             (obj, item: any) => Object.assign(obj, { [item.name]: item.value }), {})
             //@ts-ignore
             window.store.set({loginField: object})
+            //@ts-ignore
             login(this.props.loginField)
         }
     }

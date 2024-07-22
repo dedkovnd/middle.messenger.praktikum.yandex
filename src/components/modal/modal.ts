@@ -1,6 +1,5 @@
 import Block from "../../tools/Block";
 import { InputField } from "../input-field";
-import { Button } from "../button";
 
 export default class Modal extends Block {
     constructor({...props}){

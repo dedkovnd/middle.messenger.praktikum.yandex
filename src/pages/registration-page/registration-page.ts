@@ -113,6 +113,7 @@ class RegistrationPage extends Block {
       .reduce((obj, item: any) => Object.assign(obj, { [item.name]: item.value }), {})
       console.log(swapProperties(object))
       window.store.set({RegistrationField: swapProperties(object)})
+      //@ts-ignore
       create(this.props.RegistrationField)
     }
 }

@@ -11,6 +11,4 @@
 
 Навигация по меню на странице авторизации\
 
-ссылка на netlify https://sparkly-buttercream-999a44.netlify.app/
-
-актуальная ссылка, по ней не работает навигация, пытаюсь поправить https://magnificent-taffy-d7899c.netlify.app/
+ссылка на netlify https://venerable-lokum-9e9a64.netlify.app/

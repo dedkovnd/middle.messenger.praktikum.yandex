@@ -11,4 +11,4 @@
 
 Навигация по меню на странице авторизации\
 
-ссылка на netlify https://venerable-lokum-9e9a64.netlify.app/
+ссылка на netlify https://courageous-pony-d0af32.netlify.app/

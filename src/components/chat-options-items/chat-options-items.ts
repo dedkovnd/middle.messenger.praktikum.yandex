@@ -17,7 +17,7 @@ export default class ChatOptionsItems extends Block {
         const AddUser = new ChatOptionsActions({text: 'Добавить пользователя'})
         const DeleteUser = new ChatOptionsActions({text: 'Удалить пользователя'})
         const DeleteOption = new ChatOptionsActions({text: 'Удалить чат'})
-        const NewModal = new Modal({title: 'title', hidden: true, isInput: true,})
+        const AddChatModal = new Modal({title: 'Добавить чат', hidden: false, isInput: true,})
         this.children = {
             ...this.children,
             PhotoOption,
@@ -25,7 +25,7 @@ export default class ChatOptionsItems extends Block {
             AddUser,
             DeleteUser,
             DeleteOption,
-            NewModal
+            AddChatModal
         }
     }
 
@@ -45,7 +45,7 @@ export default class ChatOptionsItems extends Block {
         <div>
         <div class="options-items{{#if hidden}}__hidden{{/if}}">
         {{{AddChat}}}
-        {{{NewModal}}}
+        {{{AddChatModal}}}
         {{{PhotoOption}}}
         {{{DeleteOption}}}
         </div>

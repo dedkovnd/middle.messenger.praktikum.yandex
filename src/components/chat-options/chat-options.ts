@@ -1,6 +1,6 @@
 import Block from "../../tools/Block";
 import { ChatOptionsItems } from "../chat-options-items";
-
+import { ChatMenu } from "../chat-menu";
 type Props = {
     events?: { [eventName: string]: (e: Event) => void }
     [prop: string]: unknown
@@ -13,9 +13,10 @@ export default class ChatOptions extends Block {
             OptionsItems: new ChatOptionsItems({
                 hidden: props.hidden,
             }),
-            events: {
-                click: props.onOpen
-            }
+            ChatMenu: new ChatMenu({onClick: ()=>{
+                const status = this.children.OptionsItems.props.hidden
+                this.children.OptionsItems.setProps({hidden: !status})
+            }})
         })
     }
     componentDidUpdate(oldProps: Props, newProps: Props): boolean {
@@ -29,11 +30,7 @@ export default class ChatOptions extends Block {
     render(): string {
         return `
         <div class="menu-wrap">
-        <div class="menu">
-         <hr class="menu-line"></hr>
-         <hr class="menu-line"></hr>
-         <hr class="menu-line"></hr>
-        </div>
+        {{{ChatMenu}}}
         {{{OptionsItems}}}
         <div>
       `

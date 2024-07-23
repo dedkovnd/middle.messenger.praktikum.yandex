@@ -183,8 +183,13 @@ export default class Block {
 
     [...Object.values(this.children), ...childrenProps].forEach(child => {
         const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
-        //@ts-ignore
-        stub?.replaceWith(child.getContent());
+        try {
+          //@ts-ignore
+          stub?.replaceWith(child.getContent());
+        } catch {
+          return false
+        }
+        // stub?.replaceWith(child.getContent());
     });
 
 

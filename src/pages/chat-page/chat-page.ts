@@ -54,7 +54,7 @@ class Chatpage extends Block {
           title: e.title
         }))
       } else {
-         data = window.store.state.users.map((e: any) => ({id: e.id, name: e.login, message: '', avatar: e.avatar, title: ''}))
+         data = window.store.state.users.map((e: any) => ({id: e.id, name: e.login, message: '', avatar: e.avatar}))
       }
       //@ts-ignore
       this.children.List.setProps({cards: data?.map(({id, name, message, avatar, title}) =>  new ChatItem({id, name, message, avatar, title}))})

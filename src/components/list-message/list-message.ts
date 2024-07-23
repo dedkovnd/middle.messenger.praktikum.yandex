@@ -9,16 +9,11 @@ export default class ListMessage extends Block {
     }
 
     init() {
-        const onClickBind = this.onClick.bind(this)
-        const Options = new ChatOptions({onOpen: onClickBind, hidden: true})
+        const Options = new ChatOptions({hidden: true})
         this.children = {
             ...this.children,
             Options,
         }
-    }
-    onClick (){
-        const status = this.children.Options.props.hidden
-        this.children.Options.setProps({hidden: !status})
     }
     render(): string {
         return `

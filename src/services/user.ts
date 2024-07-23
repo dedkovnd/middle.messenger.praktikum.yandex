@@ -24,8 +24,8 @@ export const loadUsers = async (model: TSearchUser) => {
 export const updateUser = async (model: TUserUpdate) => {
     window.store.set({isLoading: true});
     try {
-        await userApi.putUser(model);
-        
+        const me = await userApi.putUser(model);
+        window.store.set({me})
     } catch (error) {
         window.store.set({loginError: 'some error'});
     } finally {
@@ -37,7 +37,8 @@ export const updateUser = async (model: TUserUpdate) => {
 export const putPhoto = async (model: FormData) => {
     window.store.set({isLoading: true});
     try {
-        await userApi.putPhoto(model)
+        const me = await userApi.putPhoto(model)
+        window.store.set({me})
     } catch (error) {
         window.store.set({loginError: 'some error'});
     } finally {

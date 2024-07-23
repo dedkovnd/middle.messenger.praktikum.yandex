@@ -1,0 +1,13 @@
+@import '../../assets/variables';
+
+.menu {
+    width: 25px;
+    height: 25px;
+    border: 1px solid $text-light-color;
+    border-radius: 50%;
+}
+
+.menu-line {
+    width: 12px;
+    margin-top: 5px;
+}

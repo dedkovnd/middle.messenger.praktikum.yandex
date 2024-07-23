@@ -20,22 +20,22 @@ class ProfileEdit extends Block {
         const onPhoneBind = this.onValid.bind(this)
         const MyImage = new UserImage({tooltip: true, onChange: onLoadBind, url: ''})
         const InputMail = new Input({title: 'Почта', className: '-user', user: true, errorUser: false,
-            onBlur: ()=>onMailBind(event, validateMail, 'InputMail'), value: 'ya19881988@yandex.ru', name: 'email'
+            onBlur: ()=>onMailBind(event, validateMail, 'InputMail'), value: '', name: 'email'
         })
         const InputLogin = new Input({title: 'Логин', className: '-user', user: true, errorUser: false,
-            onBlur: ()=>onLoginBind(event, validateLogin, 'InputLogin'), value: 'ivanivanov', name: 'login'
+            onBlur: ()=>onLoginBind(event, validateLogin, 'InputLogin'), value: '', name: 'login'
         })
         const InputName = new Input({title: 'Имя', className: '-user', user: true, errorUser: false,
-            onBlur: ()=>onNameBind(event, validateName, 'InputName'), value: 'Иван', name: 'first_name'
+            onBlur: ()=>onNameBind(event, validateName, 'InputName'), value: '', name: 'first_name'
         })
         const InputSecondName = new Input({title: 'Фамилия', className: '-user', user: true, errorUser: false,
-            onBlur: ()=>onSecondNameBind(event, validateName, 'InputSecondName'), value: 'Иванов', name: 'second_name'
+            onBlur: ()=>onSecondNameBind(event, validateName, 'InputSecondName'), value: '', name: 'second_name'
         })
         const InputChatName = new Input({title: 'Имя в чате', className: '-user', user: true, errorUser: false,
-            onBlur: ()=>onChatNameBind(event, validateName, 'InputChatName'), value: 'Name', name: 'display_name'
+            onBlur: ()=>onChatNameBind(event, validateName, 'InputChatName'), value: '', name: 'display_name'
         })
         const InputPhone = new Input({title: 'Телефон', className: '-user', user: true, errorUser: false,
-            onBlur: ()=> onPhoneBind(event, validatePhone, 'InputPhone'), value: '+7-999-212-85-06', name: 'phone'
+            onBlur: ()=> onPhoneBind(event, validatePhone, 'InputPhone'), value: '', name: 'phone'
         })
         const ButtonSave = new Button({text: 'Сохранить', className: 'user-button', onClick: onButtonBind})
         const BackToProfile = new Backspace({})

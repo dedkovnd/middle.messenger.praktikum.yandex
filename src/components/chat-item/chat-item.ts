@@ -30,7 +30,11 @@ class ChatItem extends Block {
         <div class="chat-item{{#if ${isActive}}}__active{{/if}}">
           <div class="chat-item__line"></div>
           <div class="chat-item__block">
+            {{#if title}}
             <div>{{title}}</div>
+            {{else}}
+            {{name}}
+            {{/if}}
             {{#if avatar}}
               <img class="chat-item__avatar" src="https://ya-praktikum.tech/api/v2/resources/{{avatar}}" alt="Фото чата"><img>
             {{else}}

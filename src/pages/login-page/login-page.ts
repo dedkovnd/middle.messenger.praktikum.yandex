@@ -5,19 +5,23 @@ import { connect } from "../../utils/connect";
 import { login } from "../../services/auth";
 
 class LoginPage extends Block {
-    init() {
+      init() {
         const onLoginBind = this.onClick.bind(this);
         const onAuthBind = this.onValid.bind(this)
         const onPassBind = this.onValid.bind(this)
+        const onAuthInputBind = this.onInput.bind(this)
+        const onPassInputBind = this.onInput.bind(this)
         const onRegBind = this.onClear.bind(this)
         const NavigateNav = new Navigate({});
-        const ButtonLogin = new Button({text: 'Авторизироваться', onClick: onLoginBind});
+        const ButtonLogin = new Button({text: 'Авторизироваться', onClick: onLoginBind, id: "auth"});
         const ButtonReg = new Button({text: 'Нет аккаунта?', className: 'button__white', page: 'registration', onClick: onRegBind});
         const AuthTitle = new PageTitle({title: 'Вход'})
         const InputAuth = new Input({title: "Логин", name: "login", type: 'text', value: '',
-        onBlur: ()=>onAuthBind(event, validateLogin, 'InputAuth')  })
+        onBlur: (event: Event)=>onAuthBind(event, validateLogin, 'InputAuth'), 
+        onInput: (e: Event)=>onAuthInputBind(e, 'InputAuth')})
         const InputPass = new Input({title: "Пароль", name: "password", type: "password", value: '',
-        onBlur: ()=>onPassBind(event, validatePassword, 'InputPass')})
+        onBlur: (event: Event)=>onPassBind(event, validatePassword, 'InputPass'), 
+        onInput: (e: Event)=>onPassInputBind(e, 'InputPass')})
         
         this.children = {
             ...this.children,
@@ -43,9 +47,14 @@ class LoginPage extends Block {
         } else {
             this.children[input].setProps({error: false, errorText: null, value: value})
         }
-      }
+    }
 
-      onClick(e: MouseEvent){
+    onInput(e: Event, input: string) {
+      e.preventDefault()
+      this.children[input].setProps({value: (e?.target as HTMLInputElement).value})
+    }
+    
+    onClick(e: Event){
         e.preventDefault();
         e.stopImmediatePropagation();
     
@@ -85,7 +94,7 @@ class LoginPage extends Block {
         <main>
         {{{NavigateNav}}}
         <div class="dialog">
-        <form class="login-page">
+        <form class="login-page" id="auth">
             <div class="login-page__content">
               {{{ AuthTitle }}}
               {{{ InputAuth }}}

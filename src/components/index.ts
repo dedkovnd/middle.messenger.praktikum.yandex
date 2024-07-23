@@ -18,3 +18,4 @@ export { ChatOptions } from './chat-options';
 export { ChatOptionsItems } from './chat-options-items';
 export { ChatOptionsActions } from './chat-options-actions';
 export { Modal } from './modal';
+export { ChatMenu } from './chat-menu';

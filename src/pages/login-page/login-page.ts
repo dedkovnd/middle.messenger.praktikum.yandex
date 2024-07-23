@@ -13,15 +13,15 @@ class LoginPage extends Block {
         const onPassInputBind = this.onInput.bind(this)
         const onRegBind = this.onClear.bind(this)
         const NavigateNav = new Navigate({});
-        const ButtonLogin = new Button({text: 'Авторизироваться', onClick: onLoginBind, id: "auth"});
+        const ButtonLogin = new Button({text: 'Авторизироваться', onClick: onLoginBind});
         const ButtonReg = new Button({text: 'Нет аккаунта?', className: 'button__white', page: 'registration', onClick: onRegBind});
         const AuthTitle = new PageTitle({title: 'Вход'})
         const InputAuth = new Input({title: "Логин", name: "login", type: 'text', value: '',
         onBlur: (event: Event)=>onAuthBind(event, validateLogin, 'InputAuth'), 
-        onInput: (e: Event)=>onAuthInputBind(e, 'InputAuth')})
+        onChange: (e: Event)=>onAuthInputBind(e, 'InputAuth')})
         const InputPass = new Input({title: "Пароль", name: "password", type: "password", value: '',
         onBlur: (event: Event)=>onPassBind(event, validatePassword, 'InputPass'), 
-        onInput: (e: Event)=>onPassInputBind(e, 'InputPass')})
+        onChange: (e: Event)=>onPassInputBind(e, 'InputPass')})
         
         this.children = {
             ...this.children,

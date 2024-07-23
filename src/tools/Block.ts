@@ -195,7 +195,12 @@ export default class Block {
 
     if (this._element) {
       newElement.style.display = this._element.style.display
-      this._element.replaceWith(newElement);
+      // this._element.replaceWith(newElement);
+      try {
+        this._element.replaceWith(newElement);
+      } catch {
+        return false
+      }
     }
   
       this._element = newElement;

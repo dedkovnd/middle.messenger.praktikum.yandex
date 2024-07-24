@@ -17,8 +17,8 @@
 
 .modal {
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 30%;
+    left: 40%;
     width: 300px;
     padding: 40px 30px;
     background-color: $text-bgcolor;
@@ -29,4 +29,8 @@
     &__hidden {
         display: none;
     }
+}
+
+.button-modal-wrap {
+    display: flex;
 }

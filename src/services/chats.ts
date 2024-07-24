@@ -16,7 +16,7 @@ export const loadChats = async ( ) => {
 
 }
 
-const createChat = async (model: TCreatChat) => {
+export const createChat = async (model: TCreatChat) => {
     window.store.set({isLoading: true})
     try {
         return chatsApi.createChat(model);

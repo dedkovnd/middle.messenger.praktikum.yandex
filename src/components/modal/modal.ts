@@ -1,5 +1,6 @@
 import Block from "../../tools/Block";
 import { InputField } from "../input-field";
+import { Button } from "../button";
 
 export default class Modal extends Block {
     constructor({...props}){
@@ -9,12 +10,19 @@ export default class Modal extends Block {
             InputFocus:  new InputField({
                 value: props.value,
                 name: props.name,
-                placeholder: props.placeholder,
                 events: {
-                    input: props.onInput,
-                    focus: props.onFocus
+                    change: props.onChange
                 }
             }),
+            ButtonOk: new Button({
+                text: props.textOk,
+                onClick: props.onClickOk
+            }),
+            ButtonNo: new Button({
+                text: props.textNo,
+                className: props.className,
+                onClick: props.onClickNo
+            })
         })
     }
     render(){return`
@@ -25,6 +33,10 @@ export default class Modal extends Block {
           {{#if isInput}}
           {{{InputFocus}}}
           {{/if}}
+          </div>
+          <div class="button-modal-wrap">
+          {{{ButtonOk}}}
+          {{{ButtonNo}}}
           </div>
         </div>
         </div>

@@ -40,7 +40,9 @@ class ChatItem extends Block {
             {{else}}
             <div class="chat-item__avatar"></div>
             {{/if}}
+            {{#if message}}
             <div class="chat-item__message"><span class="chat-item__message-text">{{ message }}</span></div>
+            {{/if}}
           </div>
         </div>
           `)

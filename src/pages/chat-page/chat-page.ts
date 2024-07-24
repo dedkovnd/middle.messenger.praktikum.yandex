@@ -47,9 +47,10 @@ class Chatpage extends Block {
       }
       let data = null
       if (window.store.state.users.length === 0) {
-        data = window.store.state.chats.map((e: any) => ({id: e.id, 
-          name: e.last_message.user.login, 
-          message: e.last_message.content,
+        data = window.store.state.chats.map((e: any) => ({
+          id: e.id, 
+          name: e.last_message?.user.login, 
+          message: e.last_message?.content,
           avatar: e.avatar,
           title: e.title
         }))
@@ -86,8 +87,7 @@ class Chatpage extends Block {
     }
     onInput(e: Event) {
       e.preventDefault()
-      //@ts-ignore
-      this.children.InputSearh.setProps({value: e.target.value})
+      this.children.InputSearh.setProps({value: (e?.target as HTMLInputElement).value})
       loadUsers({login: (e?.target as HTMLInputElement).value})
       console.log((e?.target as HTMLInputElement).value)
     }
@@ -95,7 +95,6 @@ class Chatpage extends Block {
 
     onSubmit(e: Event) {
       e.preventDefault()
-      //@ts-ignore 15126 1182
       const meID = window.store.state.me.id
       const userID = window.store.state.selectedChat.id
       const message = this.children.InputMessage.props.value

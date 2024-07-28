@@ -1,5 +1,5 @@
 import { HTTPTransport } from "../tools/HTTPTransport";
-import { APIError, TCreatChat } from "./type";
+import { APIError, TCreatChat, TDeleteUser } from "./type";
 import { BASEURL } from "./const";
 
 
@@ -18,7 +18,7 @@ export default class ChatApi {
         return chatApi.put('/users', {data})
     }
 
-    async getChatUser(id: number): Promise<unknown| APIError> {
+    async getChatUsers(id: number): Promise<unknown| APIError> {
         return chatApi.get(`/${id}/users`);
     }
 
@@ -32,5 +32,9 @@ export default class ChatApi {
 
     async deleteChat(data: string): Promise<unknown | APIError>{
         return chatApi.delete('', {data})
+    }
+
+    async deleteUser(data: TDeleteUser): Promise<unknown | APIError> {
+         return chatApi.delete('/users', {data})
     }
 }

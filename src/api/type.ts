@@ -14,6 +14,11 @@ export type TCreatChat = {
     title: string
 }
 
+export type TDeleteUser = {
+    users: [],
+    chatId: number
+}
+
 export type TUserUpdate = {
     email: string | unknown, 
     login: string | unknown, 
@@ -39,7 +44,7 @@ export type CreateUser = Omit<UserDTO, 'avatar' | 'display_name' | 'id'>  & {
 }
 
 export type CreateChat = {
-    title: string
+    title?: string
 }
 
 export type LoginRequestData = {

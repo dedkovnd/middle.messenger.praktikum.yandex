@@ -61,16 +61,10 @@ class Chatpage extends Block {
       this.children.List.setProps({cards: data?.map(({id, name, message, avatar, title}) =>  new ChatItem({id, name, message, avatar, title}))})
       
       let arr = []
-      if(window.store.state.selectedChat?.message) {
-        arr.push({message: window.store.state.selectedChat.message, 
-          me: ()=>checkMe(window.store.state.me.login, 
-          window.store.state.selectedChat.name)})
-      }
-      if (window.store.state.messages.length !== 0) {
-        arr.push(...window.store.state.messages.map((e: any) => ({message: e.content, 
+      arr.push(...window.store.state.messages.map((e: any) => ({message: e.content, 
           me: ()=>checkMe(window.store.state.me.id, 
           e.user_id)})))
-      }
+      
       this.children.Messages.setProps({messages: arr?.map(({message, me}) => new Message({message, me})), 
       header: window.store.state.selectedChat?.title})
     }
@@ -89,21 +83,22 @@ class Chatpage extends Block {
       e.preventDefault()
       this.children.InputSearh.setProps({value: (e?.target as HTMLInputElement).value})
       loadUsers({login: (e?.target as HTMLInputElement).value})
-      console.log((e?.target as HTMLInputElement).value)
     }
     
 
     onSubmit(e: Event) {
       e.preventDefault()
-      const meID = window.store.state.me.id
-      const userID = window.store.state.selectedChat.id
-      const message = this.children.InputMessage.props.value
+      if(this.children.InputMessage.props.value !== ''){
+        const meID = window.store.state.me.id
+        const userID = window.store.state.selectedChat.id
+        const message = this.children.InputMessage.props.value
       
-      createWebSocket(userID, meID, message)
-      this.children.InputMessage.setProps({value: ''})
-      const input = document.getElementById('messageID')
-      //@ts-ignore
-      input.value = ''
+        createWebSocket(userID, meID, message)
+        this.children.InputMessage.setProps({value: ''})
+        const input = document.getElementById('messageID')
+        //@ts-ignore
+        input.value = ''
+      }
     }
 
     onMessage(e: Event) {

@@ -1,5 +1,5 @@
 import ChatApi from "../api/chats";
-import { TCreatChat } from "../api/type";
+import { TCreatChat, TDeleteUser } from "../api/type";
 
 const chatsApi = new ChatApi();
 
@@ -40,17 +40,18 @@ export const addUser = async (model: number) => {
     }
 }
 
-export const loadChatUser = async ( id: number ) => {
+export const loadChatUsers = async ( id: number ) => {
     window.store.set({isLoading: true});
     try {
-        const user = await chatsApi.getChatUser(id);
+        const chatusers = await chatsApi.getChatUsers(id);
+        window.store.set({chatusers})
         //@ts-ignore
-        if (user.reason === "No chat") {
-            const title = String(Math.floor(100000 + Math.random() * 900000))
-            return createChat({title: title})
-        } else {
-            return user
-        }
+        // if (user.reason === "No chat") {
+        //     const title = String(Math.floor(100000 + Math.random() * 900000))
+        //     return createChat({title: title})
+        // } else {
+        //     return user
+        // }
         
     } catch (error) {
         window.store.set({loginError: 'Error'});
@@ -76,6 +77,28 @@ export const addAvatar = async (data: FormData) => {
     window.store.set({isLoading: true})
     try {
         return chatsApi.addAvatar(data)
+    } catch (error) {
+        window.store.set({loginError: 'some error'})
+    } finally {
+        window.store.set({isLoading: false})
+    }
+}
+
+export const deleteUser = async (data: TDeleteUser) => {
+    window.store.set({isLoading: true})
+    try {
+        return chatsApi.deleteUser(data)
+    } catch (error) {
+        window.store.set({loginError: 'some error'})
+    } finally {
+        window.store.set({isLoading: false})
+    }
+}
+
+export const getToken = async (data: string) => {
+    window.store.set({isLoading: true})
+    try {
+        return chatsApi.getChatToken(data)
     } catch (error) {
         window.store.set({loginError: 'some error'})
     } finally {

@@ -3,7 +3,7 @@ import ChatApi from "./chats";
 const chatsApi = new ChatApi();
 
 
-export const createWebSocket = async (chatid: number, id: number, value: string | unknown) => {
+export const createWebSocket = async (chatid: number, id: number, value?: string | unknown) => {
     
     const token = async (chatid: any) => {
         return await chatsApi.getChatToken(chatid)
@@ -14,13 +14,22 @@ export const createWebSocket = async (chatid: number, id: number, value: string 
 
     socket.addEventListener('open', () => {
         console.log('Соединение установлено');
-
-    socket.send(JSON.stringify({
-                content: value,
-                type: 'message',
-              }));
+        if(window.store.state.messages.length === 0) {
+          socket.send(JSON.stringify({
+            content: '0',
+            type: 'get old',
+            }));
+        }
+      if(value) {
+        socket.send(JSON.stringify({
+          content: value,
+          type: 'message',
+        }));
+      }
+     
         
       });
+
       
       socket.addEventListener('close', event => {
         if (event.wasClean) {
@@ -36,8 +45,16 @@ export const createWebSocket = async (chatid: number, id: number, value: string 
         console.log('Получены данные', event.data);
 
         const data = JSON.parse(event.data)
-        const oldMessages = window.store.state.messages
-        window.store.set({messages: oldMessages.concat(data)})
+        if (Array.isArray(data)) {
+          window.store.set({messages: data.reverse()})
+        }
+        if (data.type === 'message') {
+          const oldMessages = window.store.state.messages
+          window.store.set({messages: oldMessages.concat(data)})
+        }
+        if (data.type === 'error') {
+          window.store.set({messages: []})
+        }
       });
       
       socket.addEventListener('error', event => {

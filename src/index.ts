@@ -27,6 +27,7 @@ window.store = new Store({
   me: null,
   user: null,
   users: [],
+  chatusers: [],
   selectedChat: null,
   messages: []
 });

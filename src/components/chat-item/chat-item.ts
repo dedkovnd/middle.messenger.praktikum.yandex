@@ -1,5 +1,7 @@
+import { loadChatUsers } from "../../services/chats";
 import Block from "../../tools/Block";
 import { connect } from "../../utils/connect";
+import { createWebSocket } from "../../api/websocket";
 
 class ChatItem extends Block {
     constructor({...props}) {
@@ -15,7 +17,12 @@ class ChatItem extends Block {
                         avatar: props.avatar,
                         title: props.title
                     }
+                    window.store.set({messages: []})
                     console.log(card)
+                    if(props.title) {
+                      loadChatUsers(props.id)
+                      createWebSocket(props.id, window.store.state.me.id)
+                    }
                     window.store.set({selectedChat: card})
                 }
             }

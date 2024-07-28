@@ -11,4 +11,4 @@
 
 Навигация по меню на странице авторизации\
 
-ссылка на netlify https://elegant-druid-5021ae.netlify.app
+ссылка на netlify https://preeminent-chaja-579699.netlify.app

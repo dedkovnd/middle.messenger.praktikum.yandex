@@ -1,0 +1,16 @@
+@import '../../assets/variables';
+
+.options-items {
+    position: relative;
+    border: 1px solid $text-light-color;
+    border-radius: 5%;
+    width: 150px;
+    right: 75px;
+    padding-left: 10px;
+    padding-bottom: 4px;
+    margin-top: 5px;
+
+    &__hidden {
+        display: none;
+    }
+}

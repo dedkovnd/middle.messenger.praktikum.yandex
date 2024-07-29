@@ -1,0 +1,21 @@
+@import '../../assets/variables';
+
+.option-text {
+    color: $link-color-light;
+}
+
+.option-text:hover {
+    color: $link-color;
+    cursor: pointer;
+}
+
+.option-wrap {
+    height: 16px;
+}
+
+.wrap {
+    position: relative;
+    top: -25px;
+    height: 13px;
+    width: 150px;
+}

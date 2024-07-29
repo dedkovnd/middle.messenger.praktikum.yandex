@@ -1,14 +1,17 @@
 import ChatApi from "./chats";
 
+interface TokenResponse {
+  token?: string;
+}
 const chatsApi = new ChatApi();
 
 
-export const createWebSocket = async (chatid: number, id: number, value?: string | unknown) => {
+export const createWebSocket = async (chatid: string, id: number, value?: string | unknown) => {
     
-    const token = async (chatid: any) => {
+    const token = async (chatid: string): Promise<TokenResponse | unknown> => {
         return await chatsApi.getChatToken(chatid)
     }
-    const tokenID = await token(chatid)
+    const tokenID: TokenResponse | unknown = await token(chatid)
     //@ts-ignore
     const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${id}/${chatid}/${tokenID.token}`);
 
@@ -42,18 +45,21 @@ export const createWebSocket = async (chatid: number, id: number, value?: string
       }); 
 
       socket.addEventListener('message', event => {
-        console.log('Получены данные', event.data);
 
-        const data = JSON.parse(event.data)
-        if (Array.isArray(data)) {
-          window.store.set({messages: data.reverse()})
-        }
-        if (data.type === 'message') {
-          const oldMessages = window.store.state.messages
-          window.store.set({messages: oldMessages.concat(data)})
-        }
-        if (data.type === 'error') {
-          window.store.set({messages: []})
+        try {
+          const data = JSON.parse(event.data)
+          if (Array.isArray(data)) {
+            window.store.set({messages: data.reverse()})
+          }
+          if (data.type === 'message') {
+            const oldMessages = window.store.state.messages
+            window.store.set({messages: oldMessages.concat(data)})
+          }
+          if (data.type === 'error') {
+            window.store.set({messages: []})
+          }
+        } catch(error) {
+          window.store.set({loginError: 'data socket error'})
         }
       });
       

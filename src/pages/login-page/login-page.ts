@@ -4,6 +4,17 @@ import { validateLogin, validatePassword } from "../../tools/Validators";
 import { connect } from "../../utils/connect";
 import { login } from "../../services/auth";
 
+type ValidationFunction = (value: any) => string;
+
+interface Inputs {
+    [key: string]: ValidationFunction;
+}
+
+interface ConnectedProps {
+  isLoading: boolean; 
+  loginError?: string;
+}
+
 class LoginPage extends Block {
       init() {
         const onLoginBind = this.onClick.bind(this);
@@ -36,7 +47,6 @@ class LoginPage extends Block {
 
     onClear(e: Event) {
        e.preventDefault()
-       //@ts-ignore
        window.router.go('/sign-up')
     }
 
@@ -58,15 +68,13 @@ class LoginPage extends Block {
         e.preventDefault();
         e.stopImmediatePropagation();
     
-        const inputs = {
+        const inputs: Inputs = {
           InputAuth: validateLogin,
           InputPass: validatePassword
         }
     
         for (let key in inputs) {
-          //@ts-ignore
           if (inputs[key](this.children[key].props.value) !== '') {
-            //@ts-ignore
             this.children[key].setProps({error: true, errorText: inputs[key](this.children[key].props.value)})
           }
         }
@@ -83,9 +91,7 @@ class LoginPage extends Block {
           const object = data.reduce(
             (obj, item: any) => Object.assign(obj, { [item.name]: item.value }), {})
             //@ts-ignore
-            window.store.set({loginField: object})
-            //@ts-ignore
-            login(this.props.loginField)
+            login(object)
         }
     }
 
@@ -110,7 +116,7 @@ class LoginPage extends Block {
         `)
     }
 }
-//@ts-ignore
-const mapStateToPropsShort = ({loginField, isLoading, loginError}) => ({loginField, isLoading, loginError})
+
+const mapStateToPropsShort = ({isLoading, loginError}: ConnectedProps) => ({isLoading, loginError})
 
 export default connect(mapStateToPropsShort)(LoginPage)

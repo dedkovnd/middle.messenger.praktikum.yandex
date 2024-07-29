@@ -4,6 +4,17 @@ import { validateMail, validateLogin, validateName, validatePhone } from "../../
 import { me } from "../../services/auth";
 import { updateUser, putPhoto } from "../../services/user";
 import { connect } from "../../utils/connect";
+import { IMe } from "../../types";
+
+type ValidationFunction = (value: any) => string;
+
+interface Inputs {
+    [key: string]: ValidationFunction;
+}
+
+interface ConnectedProps {
+  me: IMe
+}
 
 class ProfileEdit extends Block {
     componentDidMount() {
@@ -54,8 +65,8 @@ class ProfileEdit extends Block {
       }  
 
     }
-    //@ts-ignore
-    componentDidUpdate() {
+    
+    componentDidUpdate(): boolean {
       this.children.MyImage.setProps({url: window.store.state.me.avatar})
       this.children.InputMail.setProps({value: window.store.state.me.email})
       this.children.InputLogin.setProps({value: window.store.state.me.login})
@@ -63,6 +74,7 @@ class ProfileEdit extends Block {
       this.children.InputSecondName.setProps({value: window.store.state.me.second_name})
       this.children.InputChatName.setProps({value: window.store.state.me.display_name})
       this.children.InputPhone.setProps({value: window.store.state.me.phone})
+      return true
     }
 
     onLoad(e: Event) {
@@ -84,7 +96,7 @@ class ProfileEdit extends Block {
         e.preventDefault();
         e.stopImmediatePropagation();
 
-        const inputs = {
+        const inputs: Inputs = {
             InputMail: validateMail,
             InputLogin: validateLogin,
             InputName: validateName,
@@ -108,9 +120,7 @@ class ProfileEdit extends Block {
           }
         
         for (let key in inputs) {
-            //@ts-ignore
             if (inputs[key](this.children[key].props.value) !== '') {
-              //@ts-ignore
               this.children[key].setProps({errorUser: true, errorText: inputs[key](this.children[key].props.value)})
             }
           }
@@ -153,5 +163,4 @@ class ProfileEdit extends Block {
     }
 }
 
-//@ts-ignore
-export default connect(({me}) => ({me}))(ProfileEdit);
+export default connect(({me}: ConnectedProps) => ({me}))(ProfileEdit);

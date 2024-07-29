@@ -30,7 +30,7 @@ export default class ChatApi {
         return chatApi.put(`/avatar`, {data})
     }
 
-    async deleteChat(data: string): Promise<unknown | APIError>{
+    async deleteChat(data: number | unknown): Promise<unknown | APIError>{
         return chatApi.delete('', {data})
     }
 

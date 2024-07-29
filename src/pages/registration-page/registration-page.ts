@@ -4,6 +4,17 @@ import Block from "../../tools/Block";
 import { create } from "../../services/auth";
 import { connect } from "../../utils/connect";
 
+type ValidationFunction = (value: any) => string;
+
+interface Inputs {
+    [key: string]: ValidationFunction;
+}
+
+interface ConnectedProps {
+  isLoading: boolean,
+  loginError?: string;
+}
+
 class RegistrationPage extends Block {
     init() {
         const onMailBind = this.onValid.bind(this)
@@ -66,7 +77,7 @@ class RegistrationPage extends Block {
     e.preventDefault();
     e.stopImmediatePropagation();
 
-    const inputs = {
+    const inputs: Inputs = {
       InputMail: validateMail,
       InputLogin: validateLogin,
       InputFirstName: validateName,
@@ -92,9 +103,7 @@ class RegistrationPage extends Block {
     }
 
     for (let key in inputs) {
-      //@ts-ignore
       if (inputs[key](this.children[key].props.value) !== '') {
-        //@ts-ignore
         this.children[key].setProps({error: true, errorText: inputs[key](this.children[key].props.value)})
       }
     }
@@ -111,10 +120,7 @@ class RegistrationPage extends Block {
       const object = data
       .filter(e => e.name !== 'password_confrim')
       .reduce((obj, item: any) => Object.assign(obj, { [item.name]: item.value }), {})
-      console.log(swapProperties(object))
-      window.store.set({RegistrationField: swapProperties(object)})
-      //@ts-ignore
-      create(this.props.RegistrationField)
+      create(swapProperties(object))
     }
 }
 
@@ -143,7 +149,6 @@ class RegistrationPage extends Block {
         `)
     }
 }
-//@ts-ignore
-const mapStateToPropsShort = ({RegistrationField, isLoading, loginError}) => ({RegistrationField, isLoading, loginError})
 
+const mapStateToPropsShort = ({isLoading, loginError}: ConnectedProps) => ({isLoading, loginError})
 export default connect(mapStateToPropsShort)(RegistrationPage)

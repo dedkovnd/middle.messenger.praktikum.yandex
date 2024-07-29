@@ -9,7 +9,7 @@ export default class AuthApi {
         return authApi.post('/signup', {data})
     }
 
-    async login(data: LoginRequestData): Promise<void | APIError | unknown> {
+    async login(data: LoginRequestData): Promise<LoginRequestData | APIError | unknown> {
         return authApi.post('/signin', {data});
     }
 

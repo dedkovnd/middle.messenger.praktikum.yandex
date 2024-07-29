@@ -11,11 +11,11 @@ export type TSearchUser = {
 }
 
 export type TCreatChat = {
-    title: string
+    title?: string | unknown
 }
 
 export type TDeleteUser = {
-    users: [],
+    users: [] | unknown,
     chatId: number
 }
 
@@ -41,7 +41,7 @@ export type UserDTO = {
 
 export type CreateUser = Omit<UserDTO, 'avatar' | 'display_name' | 'id'>  & {
     password: string
-}
+} | unknown
 
 export type CreateChat = {
     title?: string

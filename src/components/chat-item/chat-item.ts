@@ -2,6 +2,13 @@ import { loadChatUsers } from "../../services/chats";
 import Block from "../../tools/Block";
 import { connect } from "../../utils/connect";
 import { createWebSocket } from "../../api/websocket";
+import { IChats, ISelectedChat } from "../../types";
+
+
+interface IConnectedProps {
+  selectedChat: ISelectedChat,
+  chats: IChats[]
+}
 
 class ChatItem extends Block {
     constructor({...props}) {
@@ -55,5 +62,5 @@ class ChatItem extends Block {
           `)
       }
 }
-//@ts-ignore
-export default connect(({selectedChat, chats}) => ({selectedChat, chats}))(ChatItem);
+
+export default connect(({selectedChat, chats}: IConnectedProps) => ({selectedChat, chats}))(ChatItem);

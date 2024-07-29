@@ -5,6 +5,31 @@ import { loadUsers } from "../../services/user";
 import { connect } from "../../utils/connect";
 import { createWebSocket } from "../../api/websocket";
 import { me } from "../../services/auth";
+import { IChats, ISelectedChat, IChatUser, IMessage } from "../../types";
+
+interface IDataUser {
+  id: number;
+  login: string;
+  message?: string;
+  avatar?: string;
+  name?: string;
+
+}
+
+interface IDataSearch {
+  id: number;
+  last_message: any;
+  avatar?: string;
+  title?: string;
+}
+
+interface ConnectedProps {
+  chats: IChats[]; 
+  selectedChat: ISelectedChat;
+  isLoading: boolean;
+  loginError: string;
+  messages: IMessage[];
+}
 
 
 class Chatpage extends Block {
@@ -18,16 +43,15 @@ class Chatpage extends Block {
         const onSubmitBind = this.onSubmit.bind(this)
         const debounceBind = this.debounce.bind(this)
         const onMessageBind = this.onMessage.bind(this)
-        const ButtonMessage = new Button({className: 'button__search', onClick: onSubmitBind})
+        const ButtonMessage = new Button({className: 'button__search', onClick: onSubmitBind, text: 'Отправить'})
         const InputSearh = new Input({placeholder: 'Поиск', className: '-search', 
           onInput: debounceBind(onInputBind, 400), value: ''})
-        const InputMessage = new Input({message: true, value: '', onChange: onMessageBind, id: 'messageID'})
+        const InputMessage = new Input({message: true, value: '', onChange: onMessageBind, id: 'messageID', placeholder: 'Введите сообщение...'})
         const LinkProfile = new Link({text: 'Профиль', url: '/settings'})
         const List = new ListCard({cards: []})
         const Messages = new ListMessage({messages: [], header: 'Чат'})
         this.children = {
           ...this.children,
-          //@ts-ignore
           List,
           LinkProfile,
           InputSearh,
@@ -36,8 +60,8 @@ class Chatpage extends Block {
           Messages
         }
     }
-    //@ts-ignore
-    componentDidUpdate(oldProps, newProps) {
+   
+    componentDidUpdate(): boolean {
       function checkMe(me: string, user: string) {
         if (me === user) {
           return true
@@ -47,7 +71,7 @@ class Chatpage extends Block {
       }
       let data = null
       if (window.store.state.users.length === 0) {
-        data = window.store.state.chats.map((e: any) => ({
+        data = window.store.state.chats.map((e: IDataSearch) => ({
           id: e.id, 
           name: e.last_message?.user.login, 
           message: e.last_message?.content,
@@ -55,10 +79,10 @@ class Chatpage extends Block {
           title: e.title
         }))
       } else {
-         data = window.store.state.users.map((e: any) => ({id: e.id, name: e.login, message: '', avatar: e.avatar}))
+         data = window.store.state.users.map((e: IDataUser) => ({id: e.id, name: e.login, message: '', avatar: e.avatar}))
       }
-      //@ts-ignore
-      this.children.List.setProps({cards: data?.map(({id, name, message, avatar, title}) =>  new ChatItem({id, name, message, avatar, title}))})
+     
+      this.children.List.setProps({cards: data?.map(({id, name, message, avatar, title}: any) =>  new ChatItem({id, name, message, avatar, title}))})
       
       let arr = []
       arr.push(...window.store.state.messages.map((e: any) => ({message: e.content, 
@@ -67,6 +91,7 @@ class Chatpage extends Block {
       
       this.children.Messages.setProps({messages: arr?.map(({message, me}) => new Message({message, me})), 
       header: window.store.state.selectedChat?.title})
+      return true
     }
 
     debounce(func: any, delay: number) {
@@ -95,9 +120,8 @@ class Chatpage extends Block {
       
         createWebSocket(userID, meID, message)
         this.children.InputMessage.setProps({value: ''})
-        const input = document.getElementById('messageID')
-        //@ts-ignore
-        input.value = ''
+        const input = document.getElementById('messageID') as HTMLInputElement | null
+        input!.value = ''
       }
     }
 
@@ -131,7 +155,6 @@ class Chatpage extends Block {
         `)
     }
 }
-//@ts-ignore
-const mapStateToPropsShort = ({chats, selectedChat, isLoading, loginError, messages}) => ({chats, selectedChat, isLoading, loginError, messages})
-//@ts-ignore
+
+const mapStateToPropsShort = ({chats, selectedChat, isLoading, loginError, messages}: ConnectedProps) => ({chats, selectedChat, isLoading, loginError, messages})
 export default connect(mapStateToPropsShort)(Chatpage)

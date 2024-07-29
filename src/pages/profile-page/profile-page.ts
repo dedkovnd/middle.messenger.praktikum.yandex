@@ -2,6 +2,11 @@ import Block from "../../tools/Block";
 import { PageTitle, Backspace, UserData, UserOption, UserImage } from "../../components";
 import { connect } from "../../utils/connect";
 import { me, logout } from "../../services/auth";
+import { IMe } from "../../types";
+
+interface ConnectedProps {
+  me: IMe
+}
 
 class ProfilePage extends Block {
     componentDidMount() {
@@ -39,8 +44,8 @@ class ProfilePage extends Block {
         }
     
     }
-    //@ts-ignore
-    componentDidUpdate() {
+
+    componentDidUpdate(): boolean {
       this.children.MyImage.setProps({url: window.store.state.me.avatar})
       this.children.ProfileTitle.setProps({title: window.store.state.me.first_name})
       this.children.UserMail.setProps({value: window.store.state.me.email})
@@ -49,6 +54,7 @@ class ProfilePage extends Block {
       this.children.UserSecondName.setProps({value: window.store.state.me.second_name})
       this.children.UserChatName.setProps({value: window.store.state.me.display_name})
       this.children.UserPhone.setProps({value: window.store.state.me.phone})
+      return true
     }
 
     onLogout(e: Event) {
@@ -81,5 +87,5 @@ class ProfilePage extends Block {
         `)
     }
 }
-//@ts-ignore
-export default connect(({me}) => ({me}))(ProfilePage);
+
+export default connect(({me}: ConnectedProps) => ({me}))(ProfilePage);

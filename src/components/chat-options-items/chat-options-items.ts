@@ -3,11 +3,22 @@ import { ChatOptionsActions } from "../chat-options-actions";
 import { addAvatar, addUser, createChat, loadChats, deleteChat, deleteUser } from "../../services/chats";
 import { Modal } from "../modal";
 import { connect } from "../../utils/connect";
+import { Props, IChats, ISelectedChat, IChatUser } from "../../types";
 
-type Props = {
-    events?: { [eventName: string]: (e: Event) => void }
-    [prop: string]: unknown
-  }
+interface ICurrentUser {
+    login: string;
+    id: number; 
+}
+
+interface IUserMap {
+    [key: string]: number;
+}
+
+interface ConnectedProps {
+    selectedChat: ISelectedChat; 
+    chats: IChats[];
+    chatusers: IChatUser[]
+}
 
 class ChatOptionsItems extends Block {
     constructor({...props}) {
@@ -68,8 +79,8 @@ class ChatOptionsItems extends Block {
             return false;
         }
         if (window.store.state.selectedChat?.id){
-            //@ts-ignore
-           const description = window.store.state.chatusers.map((e)=>{return {[e.login]: e.id}}).map(obj => {
+            
+           const description = window.store.state.chatusers.map((e: ICurrentUser)=>{return {[e.login]: e.id}}).map((obj: IUserMap) => {
                 const key = Object.keys(obj)[0];
                 return `${key}: ${obj[key]}`;
             }).join(', ')
@@ -88,7 +99,6 @@ class ChatOptionsItems extends Block {
     }
 
     onCreateChat(){
-        //@ts-ignore
         createChat({title: this.children.AddChatModal.props.value})
         this.children.AddChatModal.setProps({hidden: true})
         this.children.AddChatModal.setProps({value: ''})
@@ -97,7 +107,6 @@ class ChatOptionsItems extends Block {
 
     onCreatUser(){
         if (window.store.state.selectedChat?.id){
-            //@ts-ignore
             addUser({users: [this.children.AddUserModal.props.value], chatId: window.store.state.selectedChat?.id})
             this.children.AddUserModal.setProps({hidden: true})
             this.children.AddUserModal.setProps({value: ''})
@@ -107,7 +116,6 @@ class ChatOptionsItems extends Block {
 
     onDeleteChat(){
         if (window.store.state.selectedChat?.id){
-            //@ts-ignore
             deleteChat({chatId: window.store.state.selectedChat?.id})
             loadChats()
         }
@@ -115,7 +123,6 @@ class ChatOptionsItems extends Block {
     
     onDeleteUser() {
         if (window.store.state.selectedChat?.id){
-            //@ts-ignore
             deleteUser({users: [this.children.DeleteUserModal.props.value], chatId: window.store.state.selectedChat?.id})
             this.children.DeleteUserModal.setProps({hidden: true})
             this.children.DeleteUserModal.setProps({value: ''})
@@ -155,5 +162,5 @@ class ChatOptionsItems extends Block {
         `
     }
 }
-//@ts-ignore
-export default connect(({selectedChat, chats, chatusers}) => ({selectedChat, chats, chatusers}))(ChatOptionsItems);
+
+export default connect(({selectedChat, chats, chatusers}: ConnectedProps) => ({selectedChat, chats, chatusers}))(ChatOptionsItems);

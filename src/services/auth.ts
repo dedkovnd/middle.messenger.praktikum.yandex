@@ -9,7 +9,6 @@ export const login = async (model: LoginRequestData) => {
         await authApi.login(model).then((res) => {
             //@ts-ignore
             if (res === null || res.reason === "User already in system") {
-                //@ts-ignore
                 window.router.go('/messenger')
             }
         });
@@ -25,7 +24,6 @@ export const create = async (model: CreateUser) => {
     window.store.set({isLoading: true})
     try{
         await authApi.create(model)
-        //@ts-ignore
         window.router.go('/messenger')
     } catch (error) {
         window.store.set({loginError: 'some error'})
@@ -50,7 +48,6 @@ export const logout = async ()=> {
     window.store.set({isLoading: true})
     try{
         await authApi.logout()
-        //@ts-ignore
         window.router.go('/')
     } catch (error) {
         window.store.set({loginError: 'some error'})

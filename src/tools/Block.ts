@@ -189,7 +189,6 @@ export default class Block {
         } catch {
           return false
         }
-        // stub?.replaceWith(child.getContent());
     });
 
 

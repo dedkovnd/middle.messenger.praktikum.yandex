@@ -1,5 +1,10 @@
 import Block from "../../tools/Block";
 import { connect } from "../../utils/connect";
+import { IMessage } from "../../types";
+
+interface ConnectedProps {
+  messages: IMessage[]
+}
 
 class Message extends Block {
     constructor({...props}) {
@@ -16,5 +21,5 @@ class Message extends Block {
           `)
       }
 }
-//@ts-ignore
-export default connect(({messages}) => ({messages}))(Message);
+
+export default connect(({messages}: ConnectedProps) => ({messages}))(Message);

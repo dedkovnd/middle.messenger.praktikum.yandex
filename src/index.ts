@@ -1,24 +1,16 @@
-import Handlebars from 'handlebars';
-import * as Components from './components';
 import * as Pages from './pages';
 import Router from './tools/Router';
 import { Store } from './tools/Store';
-
 
 declare global {
   export type Keys<T extends Record<string, unknown>> = keyof T;
   export type Values<T extends Record<string, unknown>> = T[Keys<T>]
   interface Window {store: any}
+  interface Window {router: any}
 }
 
 
-Object.entries(Components).forEach(([ name, component ]) => {
-  //@ts-ignore
-  Handlebars.registerPartial(name, component);
-});
-
 const router = new Router('#app');
-//@ts-ignore
 window.router = router;
 window.store = new Store({
   isLoading: false,

@@ -28,7 +28,7 @@ export const createChat = async (model: TCreatChat) => {
     }
 }
 
-export const addUser = async (model: number) => {
+export const addUser = async (model: TDeleteUser) => {
     window.store.set({isLoading: true})
     try {
         return chatsApi.addUser(model);
@@ -45,13 +45,6 @@ export const loadChatUsers = async ( id: number ) => {
     try {
         const chatusers = await chatsApi.getChatUsers(id);
         window.store.set({chatusers})
-        //@ts-ignore
-        // if (user.reason === "No chat") {
-        //     const title = String(Math.floor(100000 + Math.random() * 900000))
-        //     return createChat({title: title})
-        // } else {
-        //     return user
-        // }
         
     } catch (error) {
         window.store.set({loginError: 'Error'});
@@ -61,7 +54,7 @@ export const loadChatUsers = async ( id: number ) => {
 
 }
 
-export const deleteChat = async (id: string) => {
+export const deleteChat = async (id: number | unknown) => {
     window.store.set({isLoading: true})
     try {
         return chatsApi.deleteChat(id);

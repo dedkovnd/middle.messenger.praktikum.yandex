@@ -5,7 +5,7 @@ import { loadUsers } from "../../services/user";
 import { connect } from "../../utils/connect";
 import { createWebSocket } from "../../api/websocket";
 import { me } from "../../services/auth";
-import { IChats, ISelectedChat, IChatUser, IMessage } from "../../types";
+import { IChats, ISelectedChat, IMessage } from "../../types";
 
 interface IDataUser {
   id: number;

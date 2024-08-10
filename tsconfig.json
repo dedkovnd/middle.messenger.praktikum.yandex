@@ -18,10 +18,10 @@
     "sourceMap": true,
     "strictNullChecks": true
   },
+  "include": ["src", "typings"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node",
     "transpileOnly": true,
   },
-  "include": ["src", "typings"]
 }

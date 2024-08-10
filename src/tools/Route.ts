@@ -37,8 +37,12 @@ export default class Route {
 
     _renderDom(query: string, block: typeof Block) {
         const root = document.querySelector(query);
-        //@ts-ignore
-        root!.append(block.getContent());
+        try {
+            //@ts-ignore
+            root!.append(block.getContent());
+        } catch {
+            return false
+        }
     }
 
     render() {

@@ -94,11 +94,9 @@ class Chatpage extends Block {
       return true
     }
 
-    debounce(func: any, delay: number) {
-      let timeout: number;
-      return function() {
-        const args = arguments;
-        //@ts-ignore
+    debounce<T extends (...args: any[]) => void>(func: T, delay: number) {
+      let timeout: ReturnType<typeof setTimeout>
+      return function(this: any, ...args: Parameters<T>) {
         const fnCall = () => {func.apply(this, args)}
         clearTimeout(timeout);
         timeout = setTimeout(fnCall, delay);

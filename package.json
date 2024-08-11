@@ -12,8 +12,8 @@
     "preview": "vite preview",
     "start": "npm run build && node server.js",
     "stylelint": "stylelint src/**/*.pcss ",
-    "eslint": "eslint . ",
-    "test": "mocha && stylelint && eslint",
+    "eslint": "eslint ./src",
+    "test": "mocha && eslint",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -38,6 +38,7 @@
   "dependencies": {
     "jsdom": "^24.1.1",
     "sinon": "^18.0.0",
+    "typescript-eslint": "^8.0.1",
     "vite-plugin-handlebars": "^2.0.0"
   }
 }

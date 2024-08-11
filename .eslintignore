@@ -1,0 +1,8 @@
+# .eslintignore
+
+dist
+public
+node_modules
+server.js
+mochaSetup.js
+vite.config.mjs

@@ -6,10 +6,6 @@ export enum METHOD {
     DELETE = 'DELETE'
 };
 
-type Data = {
-  [key: string]: unknown
-}
-
 type Options = {
     method?: METHOD;
     data?: any;

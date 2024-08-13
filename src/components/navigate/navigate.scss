@@ -1,0 +1,18 @@
+@import '../../assets/variables';
+
+.navigation {
+  position: absolute;
+  display: flex;
+  margin-top: -100px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.nav-link {
+    color: $link-color;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }

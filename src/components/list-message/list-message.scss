@@ -1,0 +1,17 @@
+@import '../../assets/variables';
+
+.list-message {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: 88%;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+}
+
+.chat-option {
+    padding: 15px 10px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}

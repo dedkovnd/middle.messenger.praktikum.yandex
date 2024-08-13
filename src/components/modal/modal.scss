@@ -1,0 +1,36 @@
+@import '../../assets/variables';
+
+.background-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $text-light-color;
+    opacity: 0.8;
+    z-index: 1000;
+    
+    &__hidden {
+        display: none;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 30%;
+    left: 40%;
+    width: 300px;
+    padding: 40px 30px;
+    background-color: $text-bgcolor;
+    border-radius: 8px;
+    z-index: 1001;
+    display: block;
+
+    &__hidden {
+        display: none;
+    }
+}
+
+.button-modal-wrap {
+    display: flex;
+}

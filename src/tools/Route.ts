@@ -2,7 +2,7 @@ import Block from "./Block";
 
 interface IProps {
     events?: object,
-    rootQuery?: any
+    rootQuery?: unknown
 }
 
 export default class Route {

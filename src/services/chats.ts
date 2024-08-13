@@ -9,7 +9,7 @@ export const loadChats = async ( ) => {
         const chats = await chatsApi.getChats();
         window.store.set({chats});
     } catch (error) {
-        window.store.set({loginError: 'Error'});
+        window.store.set({loginError: error});
     } finally {
         window.store.set({isLoading: false});
     }
@@ -22,7 +22,7 @@ export const createChat = async (model: TCreatChat) => {
         return chatsApi.createChat(model);
         
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -34,7 +34,7 @@ export const addUser = async (model: TDeleteUser) => {
         return chatsApi.addUser(model);
         
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -47,7 +47,7 @@ export const loadChatUsers = async ( id: number ) => {
         window.store.set({chatusers})
         
     } catch (error) {
-        window.store.set({loginError: 'Error'});
+        window.store.set({loginError: error});
     } finally {
         window.store.set({isLoading: false});
     }
@@ -60,7 +60,7 @@ export const deleteChat = async (id: number | unknown) => {
         return chatsApi.deleteChat(id);
         
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -71,7 +71,7 @@ export const addAvatar = async (data: FormData) => {
     try {
         return chatsApi.addAvatar(data)
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -82,7 +82,7 @@ export const deleteUser = async (data: TDeleteUser) => {
     try {
         return chatsApi.deleteUser(data)
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -93,7 +93,7 @@ export const getToken = async (data: string) => {
     try {
         return chatsApi.getChatToken(data)
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }

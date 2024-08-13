@@ -8,8 +8,7 @@ export enum METHOD {
 
 type Options = {
     method?: METHOD;
-    data?: any;
-    timeout?: number
+    data?: BodyInit | null | undefined;
 };
 
 
@@ -22,27 +21,25 @@ export class HTTPTransport {
     }
     
     get: HTTPMethod = (url, options) => (
-        this.request(this.apiUrl + url, {...options, method: METHOD.GET}, options?.timeout)
+        this.request(this.apiUrl + url, {...options, method: METHOD.GET})
       )
 
       
     put: HTTPMethod = (url, options ) => (
-        this.request(this.apiUrl + url, {...options, method: METHOD.PUT}, options?.timeout)
+        this.request(this.apiUrl + url, {...options, method: METHOD.PUT})
       )
       
     post: HTTPMethod = (url, options ) => (
-        this.request(this.apiUrl + url, {...options, method: METHOD.POST}, options?.timeout)
+        this.request(this.apiUrl + url, {...options, method: METHOD.POST})
       )
 
     delete: HTTPMethod = (url, options ) => (
-        this.request(this.apiUrl + url, {...options, method: METHOD.DELETE}, options?.timeout)
+        this.request(this.apiUrl + url, {...options, method: METHOD.DELETE})
       )
-    //@ts-ignore
-    async request<TResponse>(url: string, options: Options = { method: METHOD.GET }, timeout: any): Promise<TResponse> {
-        let {method, data} = options;
+    async request<TResponse>(url: string, options: Options = { method: METHOD.GET }, ): Promise<TResponse> {
+        let  {method, data} = options;
         let includeHeaders = true;
         if (data instanceof FormData) {
-          data = data
           includeHeaders = false;
         } else {
           data = JSON.stringify(data)

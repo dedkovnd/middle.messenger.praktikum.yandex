@@ -12,7 +12,7 @@ export interface ISelectedChat {
     avatar?: string | null;
     created_by: number;
     unread_count: number;
-    last_message: any;
+    last_message: unknown;
   }
 
   export type Props = {

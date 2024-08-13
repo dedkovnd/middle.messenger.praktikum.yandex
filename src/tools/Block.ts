@@ -50,7 +50,7 @@ export default class Block {
     //   props
     // };
     const {props, children} = this._getChildrenAndProps(propsWithChildren);
-    this.props = this._makePropsProxy({ ...props });
+    this.props = this._makePropsProxy(props, this);
     this.children = children;
   
     this.eventBus = () => eventBus;
@@ -224,10 +224,7 @@ export default class Block {
     return this.element;
   }
 
-  _makePropsProxy(props: Props) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
-    const self = this;
+  _makePropsProxy(props: Props, self: Block) {
   
     return new Proxy(props, {
       get(target, prop: string) {

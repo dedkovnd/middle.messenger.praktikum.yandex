@@ -83,7 +83,7 @@ class ProfileEdit extends Block {
       putPhoto(formData)
     }
 
-    onValid(e: Event | undefined, validator: Function, input: string) {
+    onValid(e: Event | undefined, validator: ValidationFunction, input: string) {
         const value = (e?.target as HTMLInputElement).value
         if (validator(value) !== '') {
             this.children[input].setProps({errorUser: true, errorText: validator(value), value: value})
@@ -119,7 +119,7 @@ class ProfileEdit extends Block {
             }
           }
         
-        for (let key in inputs) {
+        for (const key in inputs) {
             if (inputs[key](this.children[key].props.value) !== '') {
               this.children[key].setProps({errorUser: true, errorText: inputs[key](this.children[key].props.value)})
             }

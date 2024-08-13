@@ -64,7 +64,7 @@ class RegistrationPage extends Block {
   
   }
 
-  onValid(e: Event | undefined, validator: Function, input: string) {
+  onValid(e: Event | undefined, validator: ValidationFunction, input: string) {
     const value = (e?.target as HTMLInputElement).value
     if (validator(value) !== '') {
         this.children[input].setProps({error: true, errorText: validator(value), value: value})
@@ -102,7 +102,7 @@ class RegistrationPage extends Block {
       }
     }
 
-    for (let key in inputs) {
+    for (const key in inputs) {
       if (inputs[key](this.children[key].props.value) !== '') {
         this.children[key].setProps({error: true, errorText: inputs[key](this.children[key].props.value)})
       }

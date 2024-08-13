@@ -2,11 +2,24 @@ import { StoreEvents } from "../tools/Store";
 import isEqual from "./isEqual";
 import Block from "../tools/Block";
 
-export function connect(mapStateToProps: any, dispatch?: ()=> any) {
+type Props = {
+  events?: { [eventName: string]: (e: Event) => void }
+  [prop: string]: unknown
+}
+
+interface State {
+  [key: string]: unknown;
+}
+
+type MapStateToProps = (string: any) => Partial<State>;
+
+type DispatchHandler = (...args: unknown[]) => void;
+
+export function connect(mapStateToProps: MapStateToProps, dispatch?: ()=> DispatchHandler) {
     return function(Component: typeof Block) {
       return class extends Component{
         private onChangeStoreCallback: () => void;
-        constructor(props: any) {
+        constructor(props: Props) {
           const store = window.store;
           let state = mapStateToProps(store.getState());
   

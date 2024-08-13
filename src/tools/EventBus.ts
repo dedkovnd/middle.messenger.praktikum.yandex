@@ -1,5 +1,5 @@
 export default class EventBus<E extends string> { 
-    listeners: {[key in E]?: Function[]} = {}
+    listeners: {[key in E]?: Array<(...args: object[]) => void>} = {}
 
     on<F extends (...args: any) => void>(event: E, callback: F) {
         if (!this.listeners[event]) {

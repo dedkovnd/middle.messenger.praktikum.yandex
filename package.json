@@ -11,7 +11,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "npm run build && node server.js",
-    "stylelint": "stylelint src/**/*.scss",
+    "stylelint": "stylelint \"**/*.scss\"",
     "eslint": "eslint ./src",
     "test": "mocha && eslint && stylelint",
     "prepare": "husky install"
@@ -30,7 +30,7 @@
     "lint-staged": "^15.2.8",
     "mocha": "^10.7.0",
     "sass": "^1.72.0",
-    "stylelint": "^16.6.1",
+    "stylelint": "^16.8.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4",
@@ -40,6 +40,7 @@
   "dependencies": {
     "jsdom": "^24.1.1",
     "sinon": "^18.0.0",
+    "stylelint-scss": "^6.5.0",
     "vite-plugin-handlebars": "^2.0.0"
   }
 }

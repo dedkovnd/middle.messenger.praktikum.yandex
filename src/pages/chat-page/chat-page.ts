@@ -84,7 +84,7 @@ class Chatpage extends Block {
      
       this.children.List.setProps({cards: data?.map(({id, name, message, avatar, title}: any) =>  new ChatItem({id, name, message, avatar, title}))})
       
-      let arr = []
+      const arr = []
       arr.push(...window.store.state.messages.map((e: any) => ({message: e.content, 
           me: ()=>checkMe(window.store.state.me.id, 
           e.user_id)})))

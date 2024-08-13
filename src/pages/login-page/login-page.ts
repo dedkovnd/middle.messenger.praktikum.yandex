@@ -50,7 +50,7 @@ class LoginPage extends Block {
        window.router.go('/sign-up')
     }
 
-    onValid(e: Event | undefined, validator: Function, input: string) {
+    onValid(e: Event | undefined, validator: ValidationFunction, input: string) {
         const value = (e?.target as HTMLInputElement).value
         if (validator(value) !== '') {
             this.children[input].setProps({error: true, errorText: validator(value), value: value})
@@ -73,7 +73,7 @@ class LoginPage extends Block {
           InputPass: validatePassword
         }
     
-        for (let key in inputs) {
+        for (const key in inputs) {
           if (inputs[key](this.children[key].props.value) !== '') {
             this.children[key].setProps({error: true, errorText: inputs[key](this.children[key].props.value)})
           }

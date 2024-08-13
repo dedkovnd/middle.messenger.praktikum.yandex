@@ -59,7 +59,7 @@ export const createWebSocket = async (chatid: string, id: number, value?: string
             window.store.set({messages: []})
           }
         } catch(error) {
-          window.store.set({loginError: 'data socket error'})
+          window.store.set({loginError: error})
         }
       });
       

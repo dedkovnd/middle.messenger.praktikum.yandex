@@ -14,7 +14,7 @@ export const login = async (model: LoginRequestData) => {
         });
         
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -26,7 +26,7 @@ export const create = async (model: CreateUser) => {
         await authApi.create(model)
         window.router.go('/messenger')
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -38,7 +38,7 @@ export const me = async () => {
         const me = await authApi.me()
         window.store.set({me})
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
@@ -50,7 +50,7 @@ export const logout = async ()=> {
         await authApi.logout()
         window.router.go('/')
     } catch (error) {
-        window.store.set({loginError: 'some error'})
+        window.store.set({loginError: error})
     } finally {
         window.store.set({isLoading: false})
     }
